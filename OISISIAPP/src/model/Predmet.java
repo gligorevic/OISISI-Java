@@ -15,9 +15,25 @@ public class Predmet {
 	public Predmet() {
 	}
 	
+	public Predmet(Long id, String sifra, String naziv, Integer semestar, Integer godinaStudija) {
+		this.id = id;
+		this.sifra = sifra;
+		this.naziv = naziv;
+		this.semestar = semestar;
+		this.godinaStudija = godinaStudija;
+	}
+	
+	public Predmet(Long id, String sifra, String naziv, Integer semestar, Integer godinaStudija,Profesor profesor) {
+		this.id = id;
+		this.sifra = sifra;
+		this.naziv = naziv;
+		this.semestar = semestar;
+		this.godinaStudija = godinaStudija;
+		this.profesor = profesor;
+	}
+	
 	public Predmet(Long id, String sifra, String naziv, Integer semestar, Integer godinaStudija, Profesor profesor,
 			List<Student> studenti) {
-		super();
 		this.id = id;
 		this.sifra = sifra;
 		this.naziv = naziv;

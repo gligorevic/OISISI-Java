@@ -4,3 +4,4 @@ public enum StatusStudenta {
 	B , S
 
 }
+

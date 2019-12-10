@@ -1,8 +1,6 @@
-package model;
-
-import java.util.List;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 
 public class Student {
@@ -174,9 +172,4 @@ public class Student {
 	public void setPredmeti(List<Predmet> predmeti) {
 		this.predmeti = predmeti;
 	}
-	
-	
-	
-	
-
 }
