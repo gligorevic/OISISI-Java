@@ -5,18 +5,30 @@ import java.awt.Dimension;
 import java.awt.Toolkit;
 
 import javax.swing.JFrame;
+import javax.swing.JScrollPane;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
 
 
 public class MainFrame extends JFrame {
+	public static MainFrame instance = null;
+	
+	public static MainFrame getInstance() {
+		if(instance == null) {
+			instance = new MainFrame();
+		}
+		return instance;
+	}
 	
 	private Toolbar toolbar;
 	private TabbedPane tabbedPane;
 	private Integer currentTab = 0;
 	
-	public MainFrame() {
+	private PredmetiTable predmetiTable;
+	
+	
+	private MainFrame() {
 		this.initPositionAndSetTitle();
 		this.initMenuBar();
 		this.initToolBar();
@@ -42,11 +54,10 @@ public class MainFrame extends JFrame {
 		this.tabbedPane = new TabbedPane();
 		ProfesorTab pt1 = new ProfesorTab();
 		StudentTab st1 = new StudentTab();
-		PredmetTab p1 = new PredmetTab();
 		
 		tabbedPane.addTab("Studenti", st1);
 		tabbedPane.addTab("Profesori", pt1);
-		tabbedPane.addTab("Predmeti", p1);
+		tabbedPane.addTab("Predmeti", PredmetTab.getInstance());
 		
 		tabbedPane.addChangeListener(new ChangeListener() {
 	        public void stateChanged(ChangeEvent e) {
@@ -55,7 +66,7 @@ public class MainFrame extends JFrame {
 	        }
 	    });
 		
-		this.add(this.tabbedPane);	
+		this.add(this.tabbedPane, BorderLayout.CENTER);	
 	}
 	
 	private void initToolBar() {
@@ -68,4 +79,6 @@ public class MainFrame extends JFrame {
 		this.toolbar = new Toolbar(currentTab);
 		add(toolbar, BorderLayout.NORTH);	
 	}
+	
+	
 }

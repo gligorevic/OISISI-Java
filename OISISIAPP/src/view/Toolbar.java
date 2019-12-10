@@ -9,10 +9,13 @@ import javax.swing.JToggleButton;
 import javax.swing.JToolBar;
 import javax.swing.border.Border;
 
+import listeners.DodajPredmetListener;
+import listeners.DodajStudentaNaPredmetListener;
+import listeners.IzmeniPredmetListener;
+import listeners.ObrisiPredmetListener;
+
 public class Toolbar extends JToolBar {
-	public Toolbar(Integer currentTab) {
-		System.out.println(currentTab);
-		
+	public Toolbar(Integer currentTab) {	
 		Border emptyBorder = BorderFactory.createEmptyBorder(10,10,10,10);
 		
 		JButton btnNew = new JButton();
@@ -50,6 +53,7 @@ public class Toolbar extends JToolBar {
 			btnDodaj.setIcon(new ImageIcon("images/add.png"));
 			btnDodaj.setBorder(emptyBorder);
 			add(btnDodaj);
+			btnDodaj.addActionListener(new DodajStudentaNaPredmetListener());
 			
 			addSeparator();
 			
@@ -73,5 +77,11 @@ public class Toolbar extends JToolBar {
 		add(search);
 		
 		setFloatable(false);
+	
+		if(currentTab == 2) {
+			btnNew.addActionListener(new DodajPredmetListener());
+			btnEdit.addActionListener(new IzmeniPredmetListener());
+			btnDelete.addActionListener(new ObrisiPredmetListener());
+		}
 	}
 }

@@ -32,9 +32,26 @@ public class Profesor {
 	public Profesor() {
 	}
 	
-	public Profesor(String ime, String prezime, Date datumRodjenja, String adresa, String telefon, String email,
+	public Profesor(Long id, String ime, String prezime, Date datumRodjenja, String adresa, String telefon, String email,
+			String adresaKancelarije, Integer brLicne, String titula, String zvanje) {
+		super();
+		this.id = id;
+		this.ime = ime;
+		this.prezime = prezime;
+		this.datumRodjenja = datumRodjenja;
+		this.adresa = adresa;
+		this.telefon = telefon;
+		this.email = email;
+		this.adresaKancelarije = adresaKancelarije;
+		this.brLicne = brLicne;
+		this.titula = titula;
+		this.zvanje = zvanje;
+	}
+	
+	public Profesor(Long id, String ime, String prezime, Date datumRodjenja, String adresa, String telefon, String email,
 			String adresaKancelarije, Integer brLicne, String titula, String zvanje, List<Predmet> predmeti) {
 		super();
+		this.id = id;
 		this.ime = ime;
 		this.prezime = prezime;
 		this.datumRodjenja = datumRodjenja;
