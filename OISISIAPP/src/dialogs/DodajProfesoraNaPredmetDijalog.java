@@ -9,29 +9,33 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.util.regex.Pattern;
 
+import javax.swing.InputVerifier;
 import javax.swing.JButton;
+import javax.swing.JComponent;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
-import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import controller.PredmetController;
+import controller.ProfesorController;
 import controller.StudentController;
 import model.BazaPredmet;
 import model.Predmet;
 import view.MainFrame;
 import view.PredmetTab;
 
-public class DodajStudentaNaPredmetDijalog extends JDialog {
+public class DodajProfesoraNaPredmetDijalog extends JDialog {
 
-	public DodajStudentaNaPredmetDijalog() {
-		super(MainFrame.getInstance(), "Dodaj studenta na predmet", true);
+	public DodajProfesoraNaPredmetDijalog() {
+		super(MainFrame.getInstance(), "Dodaj profesora", true);
+		
 		
 		this.setLayout(new GridBagLayout());
 		
-		JLabel index = new JLabel("Index: ");
-		JTextField indexInput = new JTextField();
+		JLabel index = new JLabel("Broj licne karte: ");
+		JTextField licnaInput = new JTextField();
 		
 		JButton potvrdi = new JButton("Potvrdi");
 		potvrdi.setEnabled(false);
@@ -40,7 +44,7 @@ public class DodajStudentaNaPredmetDijalog extends JDialog {
 		Insets insets = new Insets(10, 10, 10, 10);
 		
 		addComponent(this, index, 0, 0, 1, 1, GridBagConstraints.NORTH, GridBagConstraints.HORIZONTAL, insets, 100.0, 1.0);
-		addComponent(this, indexInput, 1, 0, 2, 1, GridBagConstraints.NORTH, GridBagConstraints.HORIZONTAL, insets, 100.0, 1.0);
+		addComponent(this, licnaInput, 1, 0, 2, 1, GridBagConstraints.NORTH, GridBagConstraints.HORIZONTAL, insets, 100.0, 1.0);
 		addComponent(this, potvrdi, 2, 2, 1, 1, GridBagConstraints.SOUTH, GridBagConstraints.HORIZONTAL, insets, 100.0, 1.0);
 		addComponent(this, odustani, 1, 2, 1, 1, GridBagConstraints.SOUTH, GridBagConstraints.HORIZONTAL, insets, 100.0, 1.0);
 		
@@ -55,19 +59,18 @@ public class DodajStudentaNaPredmetDijalog extends JDialog {
 		potvrdi.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				PredmetController.getInstance().dodajStudenta(PredmetTab.getInstance().getSelectedRow(), indexInput.getText());
+				PredmetController.getInstance().dodajProfesora(PredmetTab.getInstance().getSelectedRow(), licnaInput.getText());
 				dispose();
 			}
 		});
 		
-		indexInput.addKeyListener(new KeyListener() {	
+		licnaInput.addKeyListener(new KeyListener() {	
 			@Override
 			public void keyTyped(KeyEvent e) {
-				
 			}			
 			@Override
 			public void keyReleased(KeyEvent e) {
-				if(StudentController.getInstance().checkIfStudentExist(indexInput.getText())) {
+				if(ProfesorController.getInstance().checkIfProfesorExist(licnaInput.getText())) {
 					potvrdi.setEnabled(true);
 				} else {
 					potvrdi.setEnabled(false);
@@ -76,7 +79,6 @@ public class DodajStudentaNaPredmetDijalog extends JDialog {
 			
 			@Override
 			public void keyPressed(KeyEvent e) {
-				
 			}
 		});
 		
@@ -90,4 +92,5 @@ public class DodajStudentaNaPredmetDijalog extends JDialog {
 	    anchor, fill, insets, 0, 0);
 	    container.add(component, gbc);
 	}
+	
 }

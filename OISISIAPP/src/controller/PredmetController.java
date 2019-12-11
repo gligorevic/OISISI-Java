@@ -45,4 +45,16 @@ public class PredmetController {
 		BazaPredmet.getInstance().dodajStudenta(predmet, index);
 		PredmetTab.getInstance().azurirajPrikaz();
 	}
-}
+	
+	
+	public void dodajProfesora(int selectedRow, String licna) {
+		Predmet predmet = BazaPredmet.getInstance().getRow(selectedRow);
+		BazaPredmet.getInstance().dodajProfesora(predmet, licna);
+		PredmetTab.getInstance().azurirajPrikaz();
+	}
+	
+	public void ukloniStudenta(String index) {
+		Predmet predmet = BazaPredmet.getInstance().getRow(PredmetTab.getInstance().getSelectedRow());
+		BazaPredmet.getInstance().ukloniStudenta(predmet, index);
+	}
+} 

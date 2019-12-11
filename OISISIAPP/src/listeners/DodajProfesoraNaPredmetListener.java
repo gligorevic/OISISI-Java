@@ -3,18 +3,19 @@ package listeners;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import dialogs.DodajStudentaNaPredmetDijalog;
+import dialogs.DodajProfesoraNaPredmetDijalog;
 import view.PredmetTab;
 
-public class DodajStudentaNaPredmetListener implements ActionListener {
+public class DodajProfesoraNaPredmetListener implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		int row = PredmetTab.getInstance().getSelectedRow();
 		if(row != -1) {
-			DodajStudentaNaPredmetDijalog dsnp = new DodajStudentaNaPredmetDijalog();
-			dsnp.setVisible(true);
+			DodajProfesoraNaPredmetDijalog dpnp = new DodajProfesoraNaPredmetDijalog();
+			dpnp.setVisible(true);
 		}
+
 	}
 
 }

@@ -24,7 +24,6 @@ public class BazaPredmet {
 		generator = 0;
 		initPredmete();
 		this.kolone = new ArrayList<String>();
-		this.kolone.add("ID");
 		this.kolone.add("Sifra");
 		this.kolone.add("Naziv");
 		this.kolone.add("Semestar");
@@ -42,7 +41,7 @@ public class BazaPredmet {
 
 	private void initPredmete() {
 		this.predmeti = new ArrayList<Predmet>();
-		this.predmeti.add(new Predmet(generateId(), "BP1", "Baze Podataka 1", 5, 3, new Profesor(1l, "Ivan", "Lukovic", new Date(), "Micurinova 3", "555-333", "luki@gmail.com", "kucna", 123, "profesor", "profa")));
+		this.predmeti.add(new Predmet(generateId(), "BP1", "Baze Podataka 1", 5, 3));
 	}
 	
 	private long generateId() {
@@ -57,21 +56,19 @@ public class BazaPredmet {
 		Predmet predmet = this.predmeti.get(row);
 		switch(column) {
 		case 0:
-			return Long.toString(predmet.getId());
-		case 1:
 			return predmet.getSifra();
-		case 2:
+		case 1:
 			return predmet.getNaziv();
-		case 3:
+		case 2:
 			return Integer.toString(predmet.getSemestar());
-		case 4:
+		case 3:
 			return Integer.toString(predmet.getGodinaStudija());
-		case 5:
+		case 4:
 			Profesor profa = predmet.getProfesor();
 			if(profa == null) {
 				return "----Nije dodat----";
 			}
-			return profa.getIme();
+			return profa.getIme() + " " + profa.getPrezime();
 		default: 
 			return null; 
 		}
@@ -114,6 +111,24 @@ public class BazaPredmet {
 	
 	public void dodajStudenta(Predmet predmet, String index) {
 		Student student = BazaStudent.getInstance().getStudentByIndex(index);
+		if(student != null && !predmet.getStudenti().contains(student) && student.getGodinaStudija() >= predmet.getGodinaStudija()) {
 		predmet.getStudenti().add(student);
+		}
+	}
+	
+	public void dodajProfesora(Predmet predmet, String licna) {
+		Profesor profesor = BazaProfesor.getInstance().findByLicna(licna);
+		if(profesor != null && predmet.getProfesor() == null) {
+			predmet.setProfesor(profesor);
+		}
+	}
+	
+	public void ukloniStudenta(Predmet predmet, String index) {
+		for(Student s : predmet.getStudenti()) {
+			if(s.getBrojIndeksa().toUpperCase().equals(index.toUpperCase())) {
+				predmet.getStudenti().remove(s);
+				return;
+			}
+		}
 	}
 }

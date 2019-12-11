@@ -1,5 +1,8 @@
 package view;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.ImageIcon;
@@ -10,6 +13,7 @@ import javax.swing.JToolBar;
 import javax.swing.border.Border;
 
 import listeners.DodajPredmetListener;
+import listeners.DodajProfesoraNaPredmetListener;
 import listeners.DodajStudentaNaPredmetListener;
 import listeners.IzmeniPredmetListener;
 import listeners.ObrisiPredmetListener;
@@ -61,6 +65,8 @@ public class Toolbar extends JToolBar {
 			btnDodajProfu.setToolTipText("Dodaj profesora");
 			btnDodajProfu.setIcon(new ImageIcon("images/add.png"));
 			btnDodajProfu.setBorder(emptyBorder);
+			btnDodajProfu.addActionListener(new DodajProfesoraNaPredmetListener());
+			
 			add(btnDodajProfu);
 		}
 		
@@ -82,6 +88,13 @@ public class Toolbar extends JToolBar {
 			btnNew.addActionListener(new DodajPredmetListener());
 			btnEdit.addActionListener(new IzmeniPredmetListener());
 			btnDelete.addActionListener(new ObrisiPredmetListener());
+			search.addActionListener(new ActionListener() {
+				
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					PredmetTab.getInstance().setFilter(searchInput.getText());
+				}
+			});
 		}
 	}
 }
