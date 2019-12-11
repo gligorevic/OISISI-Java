@@ -1,5 +1,7 @@
 package controller;
 
+import model.BazaStudent;
+
 public class StudentController {
 	private static StudentController instance = null;
 
@@ -14,6 +16,7 @@ public class StudentController {
 	
 	//Provera da li student sa indexom postoji u bazi
 	public boolean checkIfStudentExist(String index) {
-		return false;
+		System.out.println(BazaStudent.getInstance().checkExistance(index));
+		return BazaStudent.getInstance().checkExistance(index);
 	}
 }
