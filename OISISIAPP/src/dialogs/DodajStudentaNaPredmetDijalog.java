@@ -5,6 +5,8 @@ import java.awt.Container;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
@@ -14,10 +16,12 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import controller.PredmetController;
 import controller.StudentController;
 import model.BazaPredmet;
 import model.Predmet;
 import view.MainFrame;
+import view.PredmetTab;
 
 public class DodajStudentaNaPredmetDijalog extends JDialog {
 
@@ -40,22 +44,31 @@ public class DodajStudentaNaPredmetDijalog extends JDialog {
 		addComponent(this, indexInput, 1, 0, 1, 1, GridBagConstraints.NORTH, GridBagConstraints.HORIZONTAL, insets, 100.0, 1.0);
 		addComponent(this, potvrdi, 2, 2, 1, 1, GridBagConstraints.NORTH, GridBagConstraints.HORIZONTAL, insets, 100.0, 1.0);
 		
+		potvrdi.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				PredmetController.getInstance().dodajStudenta(PredmetTab.getInstance().getSelectedRow(), indexInput.getText());
+				dispose();
+			}
+		});
 		
 		indexInput.addKeyListener(new KeyListener() {	
 			@Override
 			public void keyTyped(KeyEvent e) {
+				
 			}			
 			@Override
-			public void keyReleased(KeyEvent e) {	
-			}
-			
-			@Override
-			public void keyPressed(KeyEvent e) {
+			public void keyReleased(KeyEvent e) {
 				if(StudentController.getInstance().checkIfStudentExist(indexInput.getText())) {
 					potvrdi.setEnabled(true);
 				} else {
 					potvrdi.setEnabled(false);
 				}
+			}
+			
+			@Override
+			public void keyPressed(KeyEvent e) {
+				
 			}
 		});
 		

@@ -1,3 +1,5 @@
+package model;
+
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -29,7 +31,7 @@ public class Student {
 	
 	private StatusStudenta status;
 	
-	private Long prosjecnaOcjena;
+	private Double prosjecnaOcjena;
 	
 	private List<Predmet> predmeti = new ArrayList<>();
 	
@@ -37,11 +39,28 @@ public class Student {
 		
 	}
 	
-	
+	public Student(Long id, String brojIndeksa, String ime, String prezime, Date datumRodjenja, String adresaStanovanja,
+			String brojTelefona, String emailAdresa, Date datumUpisa, Integer godinaStudija, Boolean budzet,
+			StatusStudenta status, Double prosjecnaOcjena) {
+		super();
+		this.id = id;
+		this.brojIndeksa = brojIndeksa;
+		this.ime = ime;
+		this.prezime = prezime;
+		this.datumRodjenja = datumRodjenja;
+		this.adresaStanovanja = adresaStanovanja;
+		this.brojTelefona = brojTelefona;
+		this.emailAdresa = emailAdresa;
+		this.datumUpisa = datumUpisa;
+		this.godinaStudija = godinaStudija;
+		this.budzet = budzet;
+		this.status = status;
+		this.prosjecnaOcjena = prosjecnaOcjena;
+	}
 
 	public Student(Long id, String brojIndeksa, String ime, String prezime, Date datumRodjenja, String adresaStanovanja,
 			String brojTelefona, String emailAdresa, Date datumUpisa, Integer godinaStudija, Boolean budzet,
-			StatusStudenta status, Long prosjecnaOcjena, List<Predmet> predmeti) {
+			StatusStudenta status, Double prosjecnaOcjena, List<Predmet> predmeti) {
 		super();
 		this.id = id;
 		this.brojIndeksa = brojIndeksa;
@@ -157,11 +176,11 @@ public class Student {
 		this.status = status;
 	}
 
-	public Long getProsjecnaOcjena() {
+	public Double getProsjecnaOcjena() {
 		return prosjecnaOcjena;
 	}
 
-	public void setProsjecnaOcjena(Long prosjecnaOcjena) {
+	public void setProsjecnaOcjena(Double prosjecnaOcjena) {
 		this.prosjecnaOcjena = prosjecnaOcjena;
 	}
 

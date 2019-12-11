@@ -111,4 +111,9 @@ public class BazaPredmet {
 	public void ukloniProfu(Predmet predmet) {
 		predmet.setProfesor(null);
 	}
+	
+	public void dodajStudenta(Predmet predmet, String index) {
+		Student student = BazaStudent.getInstance().getStudentByIndex(index);
+		predmet.getStudenti().add(student);
+	}
 }

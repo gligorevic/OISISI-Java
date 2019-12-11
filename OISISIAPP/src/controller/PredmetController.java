@@ -39,4 +39,10 @@ public class PredmetController {
 		BazaPredmet.getInstance().ukloniProfu(predmet);
 		PredmetTab.getInstance().azurirajPrikaz();
 	}
+	
+	public void dodajStudenta(int selectedRow, String index) {
+		Predmet predmet = BazaPredmet.getInstance().getRow(selectedRow);	
+		BazaPredmet.getInstance().dodajStudenta(predmet, index);
+		PredmetTab.getInstance().azurirajPrikaz();
+	}
 }
