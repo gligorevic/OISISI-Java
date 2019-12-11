@@ -39,6 +39,32 @@ public class Student {
 		
 	}
 	
+	public Student(Long id, String brojIndeksa, String ime, 
+			String prezime, Date datumRodjenja, String adresaStanovanja,
+			String brojTelefona, String emailAdresa, Date datumUpisa, 
+			Integer godinaStudija, Boolean budzet
+			 ) {
+		super();
+		this.id = id;
+		this.brojIndeksa = brojIndeksa;
+		this.ime = ime;
+		this.prezime = prezime;
+		this.datumRodjenja = datumRodjenja;
+		this.adresaStanovanja = adresaStanovanja;
+		this.brojTelefona = brojTelefona;
+		this.emailAdresa = emailAdresa;
+		this.datumUpisa = datumUpisa;
+		this.godinaStudija = godinaStudija;
+		this.budzet = budzet;
+		if(budzet) {
+		this.status = StatusStudenta.B;
+		}else {
+			this.status = StatusStudenta.S;
+		}
+		this.prosjecnaOcjena = 0.0;
+	}
+	
+	
 	public Student(Long id, String brojIndeksa, String ime, String prezime, Date datumRodjenja, String adresaStanovanja,
 			String brojTelefona, String emailAdresa, Date datumUpisa, Integer godinaStudija, Boolean budzet,
 			StatusStudenta status, Double prosjecnaOcjena) {
