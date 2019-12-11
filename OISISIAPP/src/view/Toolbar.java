@@ -14,6 +14,7 @@ import javax.swing.border.Border;
 
 import listeners.DodajPredmetListener;
 import listeners.DodajProfesoraNaPredmetListener;
+import listeners.DodajStudentaListener;
 import listeners.DodajStudentaNaPredmetListener;
 import listeners.IzmeniPredmetListener;
 import listeners.ObrisiPredmetListener;
@@ -84,6 +85,7 @@ public class Toolbar extends JToolBar {
 		
 		setFloatable(false);
 	
+		
 		if(currentTab == 2) {
 			btnNew.addActionListener(new DodajPredmetListener());
 			btnEdit.addActionListener(new IzmeniPredmetListener());
@@ -95,6 +97,8 @@ public class Toolbar extends JToolBar {
 					PredmetTab.getInstance().setFilter(searchInput.getText());
 				}
 			});
+		}else if(currentTab == 0) {
+			btnNew.addActionListener(new DodajStudentaListener());
 		}
 	}
 }
