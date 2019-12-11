@@ -1,6 +1,9 @@
 package controller;
 
+import java.util.Date;
+
 import model.BazaStudent;
+import view.StudentTab;
 
 public class StudentController {
 	private static StudentController instance = null;
@@ -13,6 +16,16 @@ public class StudentController {
 	}
 	
 	private StudentController() {}
+	
+	public void dodajStudenta(String brojIndeksa, String ime , String prezime,Date datumRodjenja,
+			String adresa, String brojTelefona,String email, Date datumUpisa,
+			Integer godinaStudija, Boolean budzet) {
+		
+		BazaStudent.getInstance().dodajStudenta( brojIndeksa,ime,prezime,
+				datumRodjenja,adresa,brojTelefona,email,datumUpisa,godinaStudija,budzet);
+		
+		StudentTab.getInstance().azurirajPrikaz();
+	}
 	
 	//Provera da li student sa indexom postoji u bazi
 	public boolean checkIfStudentExist(String index) {
