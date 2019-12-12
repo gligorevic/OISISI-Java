@@ -20,6 +20,9 @@ import listeners.IzmeniPredmetListener;
 import listeners.IzmeniStudentaListener;
 import listeners.ObrisiPredmetListener;
 import listeners.ObrisiStudentaListener;
+import listeners.ObrisiProfesoraListener;
+import model.Profesor;
+
 
 public class Toolbar extends JToolBar {
 	/**
@@ -108,6 +111,15 @@ public class Toolbar extends JToolBar {
 			btnNew.addActionListener(new DodajStudentaListener());
 			btnEdit.addActionListener(new IzmeniStudentaListener());
 			btnDelete.addActionListener(new ObrisiStudentaListener());
+		} else {
+			btnDelete.addActionListener(new ObrisiProfesoraListener());
+			search.addActionListener(new ActionListener() {
+				
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					ProfesorTab.getInstance().setFilter(searchInput.getText());
+				}
+			});
 		}
 	}
 }

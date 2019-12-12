@@ -13,12 +13,12 @@ public class ObrisiPredmetListener implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		// TODO Auto-generated method stub
-		
-		if (PredmetTab.getInstance().getSelectedRow() == -1) {
-			JOptionPane.showMessageDialog(MainFrame.getInstance(), "Izaberite predmet u tabeli!");
-		}else if (PredmetTab.getInstance().getSelectedRow() != -1) {
-		PredmetController.getInstance().obrisiPredmet(PredmetTab.getInstance().getSelectedRow());
-		}
+
+		int selectedRow = PredmetTab.getInstance().getSelectedRow();
+		if(selectedRow != -1) {
+			PredmetController.getInstance().obrisiPredmet(selectedRow);
+		} else {
+      JOptionPane.showMessageDialog(MainFrame.getInstance(), "Izaberite predmet u tabeli!");
+    }
 	}
 }

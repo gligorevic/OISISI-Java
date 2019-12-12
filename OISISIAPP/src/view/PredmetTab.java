@@ -55,11 +55,6 @@ public class PredmetTab extends JPanel {
 		this.sorter = new TableRowSorter<>((AbstractTableModelPredmeti)predmetiTable.getModel());
 		this.sorter.setSortable(5, false);
 		predmetiTable.setRowSorter(this.sorter);
-		List<RowSorter.SortKey> sortKeys = new ArrayList<>();
-		 
-		int columnIndexToSort = 1;
-		sortKeys.add(new RowSorter.SortKey(columnIndexToSort, SortOrder.ASCENDING));
-		
 	}
 	
 	public void setFilter(String searchString) {
@@ -88,9 +83,6 @@ public class PredmetTab extends JPanel {
 		rfs.add(RowFilter.regexFilter(".*" + map.get("profesor") + ".*", 4));
 		
 		this.sorter.setRowFilter(RowFilter.andFilter(rfs));
-//		this.sorter.setRowFilter(RowFilter.regexFilter(".*" + map.get("semestar") + ".*", 2));
-//		this.sorter.setRowFilter(RowFilter.regexFilter(".*" + map.get("godina") + ".*", 3));
-//		this.sorter.setRowFilter(RowFilter.regexFilter(".*" + map.get("profseor") + ".*", 4));	
 	}
 	
 	

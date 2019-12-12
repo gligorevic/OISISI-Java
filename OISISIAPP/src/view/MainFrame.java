@@ -23,6 +23,8 @@ import javax.swing.Timer;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
+import listeners.saveWindowListener;
+
 
 
 public class MainFrame extends JFrame {
@@ -43,10 +45,11 @@ public class MainFrame extends JFrame {
 	
 	
 	private MainFrame() {
+		this.addWindowListener(new saveWindowListener());
 		this.initPositionAndSetTitle();
 		this.initMenuBar();
-		this.initToolBar();
 		this.initTabs();
+		this.initToolBar();
 		this.initStatusBar();
 	}
 	
@@ -69,7 +72,7 @@ public class MainFrame extends JFrame {
 		this.add(statusPanel,BorderLayout.SOUTH);
 		
 		
-		JLabel nameLabel = new JLabel("Studentska služba");
+		JLabel nameLabel = new JLabel("Studentska sluÅ¾ba");
 		nameLabel.setHorizontalAlignment(SwingConstants.LEFT);
 		statusPanel.add(nameLabel);
 		
@@ -110,11 +113,9 @@ public class MainFrame extends JFrame {
 	
 	private void initTabs() {
 		this.tabbedPane = new TabbedPane();
-		ProfesorTab pt1 = new ProfesorTab();
-		StudentTab st1 = new StudentTab();
 		
 		tabbedPane.addTab("Studenti", StudentTab.getInstance());
-		tabbedPane.addTab("Profesori", pt1);
+		tabbedPane.addTab("Profesori", ProfesorTab.getInstance());
 		tabbedPane.addTab("Predmeti", PredmetTab.getInstance());
 		
 		tabbedPane.addChangeListener(new ChangeListener() {

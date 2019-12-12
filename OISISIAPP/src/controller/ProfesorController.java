@@ -1,6 +1,8 @@
 package controller;
 
 import model.BazaProfesor;
+import model.Profesor;
+import view.ProfesorTab;
 
 public class ProfesorController {
 	private static ProfesorController instance = null;
@@ -20,5 +22,12 @@ public class ProfesorController {
 		} catch(Exception e) {
 			return false;
 		}
+	}
+	
+	public void obrisiProfesora(int selectedRow) {
+		Profesor profesor = BazaProfesor.getInstance().getRow(selectedRow);
+		System.out.println(profesor.getIme());
+		BazaProfesor.getInstance().obrisiProfesora(profesor);
+		ProfesorTab.getInstance().azurirajPrikaz();
 	}
 }
