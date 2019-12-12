@@ -106,6 +106,7 @@ public class BazaPredmet {
 	}
 	
 	public void ukloniProfu(Predmet predmet) {
+		BazaProfesor.getInstance().obrisiPredmetProfesora(predmet.getProfesor(), predmet);
 		predmet.setProfesor(null);
 	}
 	
@@ -120,6 +121,7 @@ public class BazaPredmet {
 		Profesor profesor = BazaProfesor.getInstance().findByLicna(licna);
 		if(profesor != null && predmet.getProfesor() == null) {
 			predmet.setProfesor(profesor);
+			BazaProfesor.getInstance().dodajPredmetProfesoru(predmet, licna);
 		}
 	}
 	

@@ -23,6 +23,8 @@ import javax.swing.Timer;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
+import listeners.saveWindowListener;
+
 
 
 public class MainFrame extends JFrame {
@@ -43,10 +45,11 @@ public class MainFrame extends JFrame {
 	
 	
 	private MainFrame() {
+		this.addWindowListener(new saveWindowListener());
 		this.initPositionAndSetTitle();
 		this.initMenuBar();
-		this.initToolBar();
 		this.initTabs();
+		this.initToolBar();
 		this.initStatusBar();
 	}
 	
@@ -56,7 +59,7 @@ public class MainFrame extends JFrame {
 		int screenHeight = screenSize.height;
 		int screenWidth = screenSize.width;
 		setSize(screenWidth * 3/4,screenHeight * 3/4);
-		setTitle("Studentska slu≈æba");
+		setTitle("Studentska sluûba");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); 
 		setLocationRelativeTo(null);
 	}
@@ -110,11 +113,9 @@ public class MainFrame extends JFrame {
 	
 	private void initTabs() {
 		this.tabbedPane = new TabbedPane();
-		ProfesorTab pt1 = new ProfesorTab();
-		StudentTab st1 = new StudentTab();
 		
-		tabbedPane.addTab("Studenti", st1);
-		tabbedPane.addTab("Profesori", pt1);
+		tabbedPane.addTab("Studenti", StudentTab.getInstance());
+		tabbedPane.addTab("Profesori", ProfesorTab.getInstance());
 		tabbedPane.addTab("Predmeti", PredmetTab.getInstance());
 		
 		tabbedPane.addChangeListener(new ChangeListener() {

@@ -1,10 +1,13 @@
 package model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public class Profesor {
+public class Profesor implements Serializable {
+
+	private static final long serialVersionUID = -8910499432809391907L;
 
 	private Long id;
 	
