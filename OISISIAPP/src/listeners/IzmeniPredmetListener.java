@@ -3,7 +3,10 @@ package listeners;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.JOptionPane;
+
 import dialogs.IzmeniPredmetDialog;
+import view.MainFrame;
 import view.PredmetTab;
 import view.PredmetiTable;
 
@@ -16,7 +19,10 @@ public class IzmeniPredmetListener implements ActionListener {
 		if( row != -1) {
 			IzmeniPredmetDialog dialog = new IzmeniPredmetDialog(row);
 			dialog.setVisible(true);
+		}else if (row == -1) {
+			JOptionPane.showMessageDialog(MainFrame.getInstance(), "Izaberite predmet u tabeli!");
 		}
+			
 	}
 
 }

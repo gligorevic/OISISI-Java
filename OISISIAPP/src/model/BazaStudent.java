@@ -103,6 +103,7 @@ private static BazaStudent instance = null;
 		
 		this.studenti.add(new Student( generateId() , brojIndeksa,ime,prezime,
 				datumRodjenja,adresa,brojTelefona,email,datumUpisa,godinaStudija,budzet	));
+		
 	}
 	
 	public String getColumnName(int index) {
@@ -126,5 +127,39 @@ private static BazaStudent instance = null;
 	
 	public void setStudenti(List<Student> studenti) {
 		this.studenti = studenti;
+	}
+
+
+	public Student getRow(int row) {
+		// TODO Auto-generated method stub
+		return this.studenti.get(row);
+	}
+
+
+	public void izmeniStudenta(int row,String brojIndeksa, String ime , String prezime,Date datumRodjenja,
+			String adresa, String brojTelefona,String email, Date datumUpisa,
+			Integer godinaStudija, Boolean budzet) {
+		// TODO Auto-generated method stub
+		
+		Student student = BazaStudent.getInstance().getRow(row);
+		
+		student.setBrojIndeksa(brojIndeksa);
+		student.setIme(ime);
+		student.setPrezime(prezime);
+		student.setDatumRodjenja(datumRodjenja);
+		student.setAdresaStanovanja(adresa);
+		student.setBrojTelefona(brojTelefona);
+		student.setEmailAdresa(email);
+		student.setDatumUpisa(datumUpisa);
+		student.setGodinaStudija(godinaStudija);
+		student.setBudzet(budzet);
+		
+		
+	}
+
+
+	public void obrisiStudenta(Student student) {
+		this.studenti.remove(student);
+		
 	}
 }

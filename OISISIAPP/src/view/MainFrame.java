@@ -113,7 +113,7 @@ public class MainFrame extends JFrame {
 		ProfesorTab pt1 = new ProfesorTab();
 		StudentTab st1 = new StudentTab();
 		
-		tabbedPane.addTab("Studenti", st1);
+		tabbedPane.addTab("Studenti", StudentTab.getInstance());
 		tabbedPane.addTab("Profesori", pt1);
 		tabbedPane.addTab("Predmeti", PredmetTab.getInstance());
 		
