@@ -16,7 +16,7 @@ public class AbstractTableModelPredmeti extends AbstractTableModel {
 
 	@Override
 	public int getColumnCount() {
-		return 7;
+		return 6;
 	}
 
 	@Override
@@ -36,9 +36,8 @@ public class AbstractTableModelPredmeti extends AbstractTableModel {
 		case 2:
 		case 3:
 		case 4:
-		case 5:
 			return String.class;
-		case 6:
+		case 5:
 			return JButton.class;
 		default:
 			return null;
@@ -47,7 +46,7 @@ public class AbstractTableModelPredmeti extends AbstractTableModel {
 	
 	@Override
 	public String getColumnName(int column) {
-		if (column >= 6) {
+		if (column >= 5) {
 			return "Lista studenata";
 		}
 		return BazaPredmet.getInstance().getColumnName(column);
@@ -55,6 +54,6 @@ public class AbstractTableModelPredmeti extends AbstractTableModel {
 	
 	@Override
 	public boolean isCellEditable(int rowIndex, int columnIndex) {
-		return columnIndex == 6;
+		return columnIndex == 5;
 	}
 }

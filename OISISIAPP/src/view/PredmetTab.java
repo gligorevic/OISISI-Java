@@ -2,10 +2,18 @@ package view;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.RowFilter;
+import javax.swing.RowSorter;
+import javax.swing.SortOrder;
 import javax.swing.border.EmptyBorder;
+import javax.swing.table.TableRowSorter;
 
 public class PredmetTab extends JPanel {
 	
@@ -19,6 +27,7 @@ public class PredmetTab extends JPanel {
 	}
 	
 	private PredmetiTable predmetiTable;
+	private TableRowSorter<AbstractTableModelPredmeti> sorter;
 	
 	private PredmetTab() {
 		this.setLayout(new BorderLayout());
@@ -28,6 +37,7 @@ public class PredmetTab extends JPanel {
 		predmetiTable.setPreferredSize( new Dimension( 1000, 480 ) );
 		JScrollPane scrollPane = new JScrollPane(predmetiTable);
 		add(scrollPane, BorderLayout.CENTER);
+		initSorter();
 	}
 	
 	public int getSelectedRow() {
@@ -40,4 +50,48 @@ public class PredmetTab extends JPanel {
 		model.fireTableDataChanged();
 		validate();
 	}
+	
+	private void initSorter() {
+		this.sorter = new TableRowSorter<>((AbstractTableModelPredmeti)predmetiTable.getModel());
+		this.sorter.setSortable(5, false);
+		predmetiTable.setRowSorter(this.sorter);
+		List<RowSorter.SortKey> sortKeys = new ArrayList<>();
+		 
+		int columnIndexToSort = 1;
+		sortKeys.add(new RowSorter.SortKey(columnIndexToSort, SortOrder.ASCENDING));
+		
+	}
+	
+	public void setFilter(String searchString) {
+		String[] parts = searchString.split(";");
+		Map<String,String> map = new HashMap<>();
+		
+		map.put("sifra", "");
+		map.put("naziv", "");
+		map.put("semestar", "");
+		map.put("godina", "");
+		map.put("profesor", "");
+		
+		for(int i = 0; i < parts.length; i++) {
+			String[] splited = parts[i].split(":");
+			if(splited.length > 1) {
+			map.put(splited[0].toLowerCase(), splited[1]);
+			}
+		}
+		
+		List<RowFilter<Object,Object>> rfs = new ArrayList<RowFilter<Object,Object>>();
+		
+		rfs.add(RowFilter.regexFilter(".*" + map.get("sifra") + ".*", 0));
+		rfs.add(RowFilter.regexFilter(".*" + map.get("naziv") + ".*", 1));
+		rfs.add(RowFilter.regexFilter(".*" + map.get("semestar") + ".*", 2));
+		rfs.add(RowFilter.regexFilter(".*" + map.get("godina") + ".*", 3));
+		rfs.add(RowFilter.regexFilter(".*" + map.get("profesor") + ".*", 4));
+		
+		this.sorter.setRowFilter(RowFilter.andFilter(rfs));
+//		this.sorter.setRowFilter(RowFilter.regexFilter(".*" + map.get("semestar") + ".*", 2));
+//		this.sorter.setRowFilter(RowFilter.regexFilter(".*" + map.get("godina") + ".*", 3));
+//		this.sorter.setRowFilter(RowFilter.regexFilter(".*" + map.get("profseor") + ".*", 4));	
+	}
+	
+	
 }

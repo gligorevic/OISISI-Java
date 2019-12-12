@@ -26,10 +26,8 @@ public class StudentController {
 		
 		StudentTab.getInstance().azurirajPrikaz();
 	}
-	
-	//Provera da li student sa indexom postoji u bazi
+
 	public boolean checkIfStudentExist(String index) {
-		System.out.println(BazaStudent.getInstance().checkExistance(index));
 		return BazaStudent.getInstance().checkExistance(index);
 	}
 }

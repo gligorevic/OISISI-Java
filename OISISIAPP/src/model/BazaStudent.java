@@ -25,6 +25,7 @@ private static BazaStudent instance = null;
 		generator = 0;
 		initStudente();
 		this.kolone = new ArrayList<String>();
+    
 		this.kolone.add("Broj Indeksa");
 		this.kolone.add("Ime");
 		this.kolone.add("Prezime");
@@ -38,6 +39,8 @@ private static BazaStudent instance = null;
 	private void initStudente() {
 		this.studenti = new ArrayList<Student>();
 		this.studenti.add(new Student(generateId(), "RA-99-2016", "Igor", "Gligorevic", new Date(), "Vojvodjanskih brigada 4", "123-456", "igor.gligorevic@hotmail.com", new Date(), 4, false, StatusStudenta.S, 8.0));
+		this.studenti.add(new Student(generateId(), "RA-98-2018", "Pera", "Peric", new Date(), "Novosadskog sajma 4", "654-321", "peraperic@hotmail.com", new Date(), 2, true, StatusStudenta.B, 9.0));
+		this.studenti.add(new Student(generateId(), "RA-97-2017", "Miki", "Veliki", new Date(), "Masarikova 2", "654-123", "mikiveliki@hotmail.com", new Date(), 3, true, StatusStudenta.B, 6.0));
 	}
 	
 	private long generateId() {
@@ -76,10 +79,7 @@ private static BazaStudent instance = null;
 	
 	
 	public boolean checkExistance(String index) {
-		System.out.println(studenti.size());
 		for(int i = 0; i < studenti.size(); i++) {
-			System.out.println(studenti.get(i).getBrojIndeksa().toUpperCase());
-			System.out.println(index.toUpperCase());
 			if(studenti.get(i).getBrojIndeksa().toUpperCase().equals(index.toUpperCase())) {
 				return true;
 			}	
