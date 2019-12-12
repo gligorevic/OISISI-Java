@@ -18,6 +18,8 @@ import listeners.DodajStudentaListener;
 import listeners.DodajStudentaNaPredmetListener;
 import listeners.IzmeniPredmetListener;
 import listeners.ObrisiPredmetListener;
+import listeners.ObrisiProfesoraListener;
+import model.Profesor;
 
 public class Toolbar extends JToolBar {
 	public Toolbar(Integer currentTab) {	
@@ -99,6 +101,15 @@ public class Toolbar extends JToolBar {
 			});
 		}else if(currentTab == 0) {
 			btnNew.addActionListener(new DodajStudentaListener());
+		} else {
+			btnDelete.addActionListener(new ObrisiProfesoraListener());
+			search.addActionListener(new ActionListener() {
+				
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					ProfesorTab.getInstance().setFilter(searchInput.getText());
+				}
+			});
 		}
 	}
 }

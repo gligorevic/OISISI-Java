@@ -3,29 +3,20 @@ package view;
 import javax.swing.JButton;
 import javax.swing.table.AbstractTableModel;
 
-import model.BazaPredmet;
+import model.BazaProfesor;
 
-public class AbstractTableModelPredmeti extends AbstractTableModel {
+public class AbstractTableModelProfesori extends AbstractTableModel {
 
-	private static final long serialVersionUID = 8454002200965331257L;
-	
+	private static final long serialVersionUID = -3261024513031285602L;
+
 	@Override
 	public int getRowCount() {
-		return BazaPredmet.getInstance().getPredmeti().size();
+		return BazaProfesor.getInstance().getProfesori().size();
 	}
 
 	@Override
 	public int getColumnCount() {
 		return 6;
-	}
-
-	@Override
-	public Object getValueAt(int rowIndex, int columnIndex) {
-		if(columnIndex < 5) {
-			return BazaPredmet.getInstance().getValueAt(rowIndex, columnIndex);
-		} else {
-			return new JButton("" + rowIndex);
-		}
 	}
 
 	@Override
@@ -45,15 +36,25 @@ public class AbstractTableModelPredmeti extends AbstractTableModel {
 	}
 	
 	@Override
+	public Object getValueAt(int rowIndex, int columnIndex) {
+		if(columnIndex < 5) {
+			return BazaProfesor.getInstance().getValueAt(rowIndex, columnIndex);
+		} else {
+			return new JButton("" + rowIndex);
+		}
+	}
+	
+	@Override
 	public String getColumnName(int column) {
 		if (column >= 5) {
-			return "Lista studenata";
+			return "Prikazi vise";
 		}
-		return BazaPredmet.getInstance().getColumnName(column);
+		return BazaProfesor.getInstance().getColumnName(column);
 	}
 	
 	@Override
 	public boolean isCellEditable(int rowIndex, int columnIndex) {
 		return columnIndex == 5;
 	}
+
 }
