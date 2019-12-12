@@ -59,7 +59,7 @@ public class MainFrame extends JFrame {
 		int screenHeight = screenSize.height;
 		int screenWidth = screenSize.width;
 		setSize(screenWidth * 3/4,screenHeight * 3/4);
-		setTitle("Studentska slu�ba");
+		setTitle("Studentska služba");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); 
 		setLocationRelativeTo(null);
 	}
@@ -72,7 +72,7 @@ public class MainFrame extends JFrame {
 		this.add(statusPanel,BorderLayout.SOUTH);
 		
 		
-		JLabel nameLabel = new JLabel("Studentska služba");
+		JLabel nameLabel = new JLabel("Studentska sluÅ¾ba");
 		nameLabel.setHorizontalAlignment(SwingConstants.LEFT);
 		statusPanel.add(nameLabel);
 		

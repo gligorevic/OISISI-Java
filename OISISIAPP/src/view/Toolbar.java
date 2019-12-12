@@ -17,11 +17,19 @@ import listeners.DodajProfesoraNaPredmetListener;
 import listeners.DodajStudentaListener;
 import listeners.DodajStudentaNaPredmetListener;
 import listeners.IzmeniPredmetListener;
+import listeners.IzmeniStudentaListener;
 import listeners.ObrisiPredmetListener;
+import listeners.ObrisiStudentaListener;
 import listeners.ObrisiProfesoraListener;
 import model.Profesor;
 
+
 public class Toolbar extends JToolBar {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 598066133790021983L;
+
 	public Toolbar(Integer currentTab) {	
 		Border emptyBorder = BorderFactory.createEmptyBorder(10,10,10,10);
 		
@@ -101,6 +109,8 @@ public class Toolbar extends JToolBar {
 			});
 		}else if(currentTab == 0) {
 			btnNew.addActionListener(new DodajStudentaListener());
+			btnEdit.addActionListener(new IzmeniStudentaListener());
+			btnDelete.addActionListener(new ObrisiStudentaListener());
 		} else {
 			btnDelete.addActionListener(new ObrisiProfesoraListener());
 			search.addActionListener(new ActionListener() {

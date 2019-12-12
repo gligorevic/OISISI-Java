@@ -3,14 +3,18 @@ package view;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.border.EmptyBorder;
 
 public class StudentTab extends JPanel {
 	
-private static StudentTab instance = null;
+/**
+	 * 
+	 */
+	private static final long serialVersionUID = 5298032789657176485L;
+	
+	private static StudentTab instance = null;
 	
 	public static StudentTab getInstance() {
 		if(instance == null) {
