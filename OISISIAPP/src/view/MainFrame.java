@@ -108,7 +108,12 @@ public class MainFrame extends JFrame {
 	}
 	
 	private void initMenuBar() {
-		this.setJMenuBar(new MenuBar());
+		this.setJMenuBar(new MenuBar(currentTab));
+	}
+	
+	private void reinitMenuBar() {
+		this.remove(this.getMenuBar());
+		this.setJMenuBar(new MenuBar(currentTab));
 	}
 	
 	private void initTabs() {
@@ -122,6 +127,7 @@ public class MainFrame extends JFrame {
 	        public void stateChanged(ChangeEvent e) {
 	             currentTab = tabbedPane.getSelectedIndex();
 	             reinitToolBar();
+	             reinitMenuBar();
 	        }
 	    });
 		

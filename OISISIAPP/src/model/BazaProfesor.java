@@ -121,4 +121,34 @@ public class BazaProfesor {
 	public void obrisiPredmetProfesora(Profesor profesor, Predmet predmet) {
 		profesor.getPredmeti().remove(predmet);
 	}
+
+	public void dodajProfesora(String ime, String prezime, Date datumRodjenja, String adresa, String brojTelefona,
+			String email, String adresaKancelarije, Integer brLicne, String titula, String zvanje) {
+		// TODO Auto-generated method stub
+		this.profesori.add(new Profesor(generateId(), ime , prezime , datumRodjenja, adresa, brojTelefona,
+				email , adresaKancelarije,brLicne,titula,zvanje));
+	}
+
+	public void izmeniProfesora(int row, String ime, String prezime, Date datumRodjenjaDate, String adresa,
+			String telefon, String email, String adresaKancelarije, int brojLicneKarteInt, String titula,
+			String zvanje) {
+		// TODO Auto-generated method stub
+		Profesor profesor = BazaProfesor.getInstance().getRow(row);
+		
+		profesor.setIme(ime);
+		profesor.setPrezime(prezime);
+		profesor.setDatumRodjenja(datumRodjenjaDate);
+		profesor.setAdresa(adresa);
+		profesor.setTelefon(telefon);
+		profesor.setEmail(email);
+		profesor.setAdresaKancelarije(adresaKancelarije);
+		profesor.setBrLicne(brojLicneKarteInt);
+		profesor.setTitula(titula);
+		profesor.setZvanje(zvanje);
+		
+		
+		
+		
+		
+	}
 }

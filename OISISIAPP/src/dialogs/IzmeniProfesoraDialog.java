@@ -13,39 +13,36 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-import javax.swing.ButtonGroup;
 import javax.swing.JButton;
-import javax.swing.JCheckBox;
 import javax.swing.JDialog;
 import javax.swing.JFormattedTextField;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JRadioButton;
-import javax.swing.JSpinner;
 import javax.swing.JTextField;
 import javax.swing.SpinnerModel;
 import javax.swing.SpinnerNumberModel;
 
-import controller.PredmetController;
+import controller.ProfesorController;
 import controller.StudentController;
+import model.BazaProfesor;
+import model.BazaStudent;
+import model.Profesor;
+import model.Student;
 import view.MainFrame;
 
-
-public class DodajStudentaDialog extends JDialog {
+public class IzmeniProfesoraDialog extends JDialog{
 
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = -7842107748648409029L;
-	
-	public DodajStudentaDialog(){
-	
-		super(MainFrame.getInstance(), "Dodaj studenta", true);
-	
-		this.setLayout(new GridBagLayout());
-		setSize(400,500);
+	private static final long serialVersionUID = 3047424752372152212L;
 		
-		SpinnerModel godinaStudijaModel = new SpinnerNumberModel(1 , 1 , 5 , 1);
+	public IzmeniProfesoraDialog(int row) {
+		
+		super(MainFrame.getInstance(), "Izmeni Profesora" , true);
+		this.setLayout(new GridBagLayout());
+		Profesor profesor= BazaProfesor.getInstance().getRow(row);
+		setSize(400,500);
 		
 		JLabel ime = new JLabel("Ime: ");
 		JLabel prezime = new JLabel("Prezime: ");
@@ -53,10 +50,10 @@ public class DodajStudentaDialog extends JDialog {
 		JLabel adresa= new JLabel("Adresa stanovanja: ");
 		JLabel telefon= new JLabel("Kontakt telefon: ");
 		JLabel email= new JLabel("Email adresa: ");
-		JLabel brIndexa= new JLabel("Broj indexa: ");
-		JLabel datumUpisa= new JLabel("Datum Upisa: ");
-		JLabel godinaStudija = new JLabel("Godina studija: ");
-		JLabel status = new JLabel("Status:");
+		JLabel adresaKancelarije= new JLabel("Adresa kancelarije: ");
+		JLabel brLicne= new JLabel("Broj licne karte:");
+		JLabel titula = new JLabel("Titula: ");
+		JLabel zvanje = new JLabel("Zvanje: ");
 		
 		Insets insets = new Insets(10,0,0,0);
 		
@@ -66,41 +63,38 @@ public class DodajStudentaDialog extends JDialog {
 		addComponent(this, adresa ,0,3,1,1,GridBagConstraints.NORTH , GridBagConstraints.HORIZONTAL, insets, 0.1,1.0);
 		addComponent(this, telefon ,0,4,1,1,GridBagConstraints.NORTH , GridBagConstraints.HORIZONTAL, insets, 0.1,1.0);
 		addComponent(this, email ,0,5,1,1,GridBagConstraints.NORTH , GridBagConstraints.HORIZONTAL, insets, 0.1,1.0);
-		addComponent(this, brIndexa ,0,6,1,1,GridBagConstraints.NORTH , GridBagConstraints.HORIZONTAL, insets, 0.1,1.0);
-		addComponent(this, datumUpisa ,0,7,1,1,GridBagConstraints.NORTH , GridBagConstraints.HORIZONTAL, insets, 0.1,1.0);
-		addComponent(this, godinaStudija ,0,8,1,1,GridBagConstraints.NORTH , GridBagConstraints.HORIZONTAL, insets, 0.1,1.0);
-		addComponent(this, status ,0,9,1,1,GridBagConstraints.NORTH , GridBagConstraints.HORIZONTAL, insets, 0.1,1.0);
+		addComponent(this, adresaKancelarije ,0,6,1,1,GridBagConstraints.NORTH , GridBagConstraints.HORIZONTAL, insets, 0.1,1.0);
+		addComponent(this, brLicne ,0,7,1,1,GridBagConstraints.NORTH , GridBagConstraints.HORIZONTAL, insets, 0.1,1.0);
+		addComponent(this, titula ,0,8,1,1,GridBagConstraints.NORTH , GridBagConstraints.HORIZONTAL, insets, 0.1,1.0);
+		addComponent(this, zvanje ,0,9,1,1,GridBagConstraints.NORTH , GridBagConstraints.HORIZONTAL, insets, 0.1,1.0);
 		
-		JTextField imeInput = new JTextField(); //0
-		JTextField prezimeInput = new JTextField();//1
-		JTextField adresaInput = new JTextField(); //3
-		JTextField telefonInput = new JTextField(); //4
-		JTextField emailInput = new JTextField();//5
-		JTextField indeksInput = new JTextField();//6
-		JSpinner godinaStudijaInput = new JSpinner(godinaStudijaModel);//8
+		JTextField imeInput = new JTextField(profesor.getIme()); //0
+		JTextField prezimeInput = new JTextField(profesor.getPrezime());//1
+		JTextField adresaInput = new JTextField(profesor.getAdresa()); //3
+		JTextField telefonInput = new JTextField(profesor.getTelefon()); //4
+		JTextField emailInput = new JTextField(profesor.getEmail());//5
+		JTextField adresaKancelarijeInput = new JTextField(profesor.getAdresaKancelarije()); //0
+		JTextField brLicneKarteInput = new JTextField(profesor.getBrLicne().toString());//7
+		JTextField titulaInput = new JTextField(profesor.getTitula());//1
+		JTextField zvanjeInput = new JTextField(profesor.getZvanje()); //3
 		
 		DateFormat formatDatuma = new SimpleDateFormat("dd-mm-yyyy");
 		JFormattedTextField datumRodjenjaInput = new JFormattedTextField(formatDatuma);
-		JFormattedTextField datumUpisaInput = new JFormattedTextField(formatDatuma);
-	
 		
-		JCheckBox statusStudentaInput = new JCheckBox("Budzet" , false);
-	
+		datumRodjenjaInput.setValue(profesor.getDatumRodjenja());
+		
 		addComponent(this, imeInput, 1, 0, 2, 1, GridBagConstraints.NORTH, GridBagConstraints.HORIZONTAL, insets, 100.0, 1.0);
 		addComponent(this, prezimeInput, 1, 1, 2, 1, GridBagConstraints.NORTH, GridBagConstraints.HORIZONTAL, insets, 100.0, 1.0);
 		addComponent(this, datumRodjenjaInput, 1, 2, 2, 1, GridBagConstraints.NORTH, GridBagConstraints.HORIZONTAL, insets, 100.0, 1.0);
 		addComponent(this, adresaInput, 1, 3, 2, 1, GridBagConstraints.NORTH, GridBagConstraints.HORIZONTAL, insets, 100.0, 1.0);
 		addComponent(this, telefonInput, 1, 4, 2, 1, GridBagConstraints.NORTH, GridBagConstraints.HORIZONTAL, insets, 100.0, 1.0);
 		addComponent(this, emailInput, 1, 5, 2, 1, GridBagConstraints.NORTH, GridBagConstraints.HORIZONTAL, insets, 100.0, 1.0);
-		addComponent(this, indeksInput, 1, 6, 2, 1, GridBagConstraints.NORTH, GridBagConstraints.HORIZONTAL, insets, 100.0, 1.0);
-		addComponent(this, datumUpisaInput, 1, 7, 2, 1, GridBagConstraints.NORTH, GridBagConstraints.HORIZONTAL, insets, 100.0, 1.0);
-		addComponent(this, godinaStudijaInput, 1, 8, 2, 1, GridBagConstraints.NORTH, GridBagConstraints.HORIZONTAL, insets, 100.0, 1.0);
-		addComponent(this, statusStudentaInput, 1, 9, 2, 1, GridBagConstraints.NORTH, GridBagConstraints.HORIZONTAL, insets, 100.0, 1.0);
+		addComponent(this, adresaKancelarijeInput, 1, 6, 2, 1, GridBagConstraints.NORTH, GridBagConstraints.HORIZONTAL, insets, 100.0, 1.0);
+		addComponent(this, brLicneKarteInput, 1, 7, 2, 1, GridBagConstraints.NORTH, GridBagConstraints.HORIZONTAL, insets, 100.0, 1.0);
+		addComponent(this, titulaInput, 1, 8, 2, 1, GridBagConstraints.NORTH, GridBagConstraints.HORIZONTAL, insets, 100.0, 1.0);
+		addComponent(this, zvanjeInput, 1, 9, 2, 1, GridBagConstraints.NORTH, GridBagConstraints.HORIZONTAL, insets, 100.0, 1.0);
 		
-		
-		
-		
-		JPanel jp = new JPanel();
+JPanel jp = new JPanel();
 		
 		JButton nazad = new JButton("Nazad");
 		JButton potvrdi = new JButton("Potvrdi");
@@ -123,7 +117,7 @@ public class DodajStudentaDialog extends JDialog {
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
 				SimpleDateFormat formatter = new SimpleDateFormat("dd-mm-yyyy");
-			
+				
 				Date datumRodjenjaDate = new Date();
 				try {
 					datumRodjenjaDate = formatter.parse(datumRodjenjaInput.getText());
@@ -131,18 +125,14 @@ public class DodajStudentaDialog extends JDialog {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
-				Date datumUpisaDate= new Date();
-				try {
-					datumUpisaDate = formatter.parse(datumUpisaInput.getText());
-				} catch (ParseException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
 				
-				StudentController.getInstance().dodajStudenta(indeksInput.getText(), 
-						imeInput.getText(), prezimeInput.getText(),datumRodjenjaDate,adresaInput.getText(),telefonInput.getText(),
-						emailInput.getText(),datumUpisaDate,(Integer)godinaStudijaInput.getValue(),
-						statusStudentaInput.isSelected());
+				
+				
+				int  brojLicneKarteInt = Integer.parseInt(brLicneKarteInput.getText());
+				
+				ProfesorController.getInstance().izmeniProfesora(row ,imeInput.getText(), prezimeInput.getText(),datumRodjenjaDate,
+						adresaInput.getText(),telefonInput.getText(),emailInput.getText(), adresaKancelarijeInput.getText(),
+						brojLicneKarteInt,titulaInput.getText(), zvanjeInput.getText());
 				
 				dispose();
 			}
@@ -158,6 +148,7 @@ public class DodajStudentaDialog extends JDialog {
 		
 		
 		setLocationRelativeTo(MainFrame.getInstance());
+		
 	}
 	
 	private void addComponent(Container container, Component component, int gridx, int gridy, int gridwidth, int gridheight, int anchor, int fill, Insets insets, Double weightx, Double weighty) {
@@ -166,4 +157,6 @@ public class DodajStudentaDialog extends JDialog {
 	    container.add(component, gbc);
 	}
 	
+	
+
 }

@@ -61,7 +61,7 @@ public class AbstractTableModelStudenti extends AbstractTableModel {
 	
 	@Override
 	public boolean isCellEditable(int rowIndex, int columnIndex) {
-		return columnIndex == 8;
+		return columnIndex == 7;
 	}
 	
 	
