@@ -13,10 +13,12 @@ import javax.swing.JToolBar;
 import javax.swing.border.Border;
 
 import listeners.DodajPredmetListener;
+import listeners.DodajProfesoraListener;
 import listeners.DodajProfesoraNaPredmetListener;
 import listeners.DodajStudentaListener;
 import listeners.DodajStudentaNaPredmetListener;
 import listeners.IzmeniPredmetListener;
+import listeners.IzmeniProfesoraListener;
 import listeners.IzmeniStudentaListener;
 import listeners.ObrisiPredmetListener;
 import listeners.ObrisiStudentaListener;
@@ -111,8 +113,19 @@ public class Toolbar extends JToolBar {
 			btnNew.addActionListener(new DodajStudentaListener());
 			btnEdit.addActionListener(new IzmeniStudentaListener());
 			btnDelete.addActionListener(new ObrisiStudentaListener());
+			
+			search.addActionListener(new ActionListener() {
+				
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					StudentTab.getInstance().setFilter(searchInput.getText());
+				}
+			});
+			
 		} else {
 			btnDelete.addActionListener(new ObrisiProfesoraListener());
+			btnNew.addActionListener(new DodajProfesoraListener());
+			btnEdit.addActionListener(new IzmeniProfesoraListener());
 			search.addActionListener(new ActionListener() {
 				
 				@Override
