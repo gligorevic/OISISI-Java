@@ -2,6 +2,7 @@ package model;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
 
 public class BazaPredmet {
@@ -102,7 +103,15 @@ public class BazaPredmet {
 	}
 	
 	public void obrisiPredmet(Predmet predmet) {
-		this.predmeti.remove(predmet);
+		
+		Iterator<Predmet> iter = this.predmeti.listIterator();
+		
+		while(iter.hasNext()) {
+			Predmet p = iter.next();
+			if(p == predmet) {
+				iter.remove();
+			}
+		}
 	}
 	
 	public void ukloniProfu(Predmet predmet) {
@@ -133,4 +142,36 @@ public class BazaPredmet {
 			}
 		}
 	}
+
+	public void obrisiStudentaSaSvihPredmeta(Student student) {
+		// TODO Auto-generated method stub
+		Iterator<Predmet> iter = this.predmeti.listIterator();
+		
+		while(iter.hasNext()) {
+			Predmet p = iter.next();
+			
+			Iterator<Student> iterStudent = p.getStudenti().listIterator();
+			
+			while(iterStudent.hasNext()) {
+				Student s = iterStudent.next();
+				if(s == student) {
+					iterStudent.remove();
+				}
+			}
+		}
+	}
+
+	public void obrisiProfesoraSaSvihPredmeta(Profesor profesor) {
+		// TODO Auto-generated method stub
+		Iterator<Predmet> iter = this.predmeti.listIterator();
+		
+		while(iter.hasNext()) {
+			Predmet p = iter.next();
+
+			if(p.getProfesor() == profesor) {
+				this.ukloniProfu(p);
+			}
+		}
+	}
+	
 }

@@ -20,6 +20,7 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import javax.swing.text.MaskFormatter;
 
 import controller.ProfesorController;
 import controller.StudentController;
@@ -73,7 +74,7 @@ public class DodajProfesoraDialog extends JDialog {
 		JTextField zvanjeInput = new JTextField(); //3
 		
 		DateFormat formatDatuma = new SimpleDateFormat("dd-mm-yyyy");
-		JFormattedTextField datumRodjenjaInput = new JFormattedTextField(formatDatuma);
+		JFormattedTextField datumRodjenjaInput = new JFormattedTextField(getMaskFormatterDate("##-##-####"));
 		
 		
 		addComponent(this, imeInput, 1, 0, 2, 1, GridBagConstraints.NORTH, GridBagConstraints.HORIZONTAL, insets, 100.0, 1.0);
@@ -122,13 +123,21 @@ public class DodajProfesoraDialog extends JDialog {
 				
 				
 				int  brojLicneKarteInt = Integer.parseInt(brLicneKarteInput.getText());
+				if(imeInput.getText().isEmpty() || prezimeInput.getText().isEmpty() ||
+						adresaInput.getText().isEmpty() || telefonInput.getText().isEmpty() || emailInput.getText().isEmpty() || adresaKancelarijeInput.getText().isEmpty() ||
+						((Integer)brojLicneKarteInt == null)  || titulaInput.getText().isEmpty() || zvanjeInput.getText().isEmpty() || (datumRodjenjaDate == null)) {
+
+					JOptionPane.showMessageDialog(MainFrame.getInstance(), "Popunite sva polja!");
+				}
+				else {
+					ProfesorController.getInstance().dodajProfesora(imeInput.getText(), prezimeInput.getText(),datumRodjenjaDate,
+							adresaInput.getText(),telefonInput.getText(),emailInput.getText(), adresaKancelarijeInput.getText(),
+							brojLicneKarteInt,titulaInput.getText(), zvanjeInput.getText());
+					dispose();
+					
+				}
 				
-				ProfesorController.getInstance().dodajProfesora(imeInput.getText(), prezimeInput.getText(),datumRodjenjaDate,
-						adresaInput.getText(),telefonInput.getText(),emailInput.getText(), adresaKancelarijeInput.getText(),
-						brojLicneKarteInt,titulaInput.getText(), zvanjeInput.getText());
 				
-				
-				dispose();
 			}
 		});
 		
@@ -149,5 +158,15 @@ public class DodajProfesoraDialog extends JDialog {
 	    anchor, fill, insets, 0, 0);
 	    container.add(component, gbc);
 	}
-
+	
+	private MaskFormatter getMaskFormatterDate(String format) {
+		MaskFormatter mask = null;
+		try {
+			mask = new MaskFormatter(format);
+			mask.setPlaceholderCharacter('0');
+		}catch(ParseException ex){
+			ex.printStackTrace();
+		}
+		return mask;
+	}
 }

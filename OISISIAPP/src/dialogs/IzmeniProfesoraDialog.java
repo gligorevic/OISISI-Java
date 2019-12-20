@@ -17,10 +17,12 @@ import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JFormattedTextField;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SpinnerModel;
 import javax.swing.SpinnerNumberModel;
+import javax.swing.text.MaskFormatter;
 
 import controller.ProfesorController;
 import controller.StudentController;
@@ -79,7 +81,7 @@ public class IzmeniProfesoraDialog extends JDialog{
 		JTextField zvanjeInput = new JTextField(profesor.getZvanje()); //3
 		
 		DateFormat formatDatuma = new SimpleDateFormat("dd-mm-yyyy");
-		JFormattedTextField datumRodjenjaInput = new JFormattedTextField(formatDatuma);
+		JFormattedTextField datumRodjenjaInput = new JFormattedTextField(getMaskFormatterDate("##-##-####"));
 		
 		datumRodjenjaInput.setValue(profesor.getDatumRodjenja());
 		
@@ -129,12 +131,19 @@ JPanel jp = new JPanel();
 				
 				
 				int  brojLicneKarteInt = Integer.parseInt(brLicneKarteInput.getText());
+				if(imeInput.getText().isEmpty() || prezimeInput.getText().isEmpty() ||
+						adresaInput.getText().isEmpty() || telefonInput.getText().isEmpty() || emailInput.getText().isEmpty() || adresaKancelarijeInput.getText().isEmpty() ||
+						((Integer)brojLicneKarteInt == null)  || titulaInput.getText().isEmpty() || zvanjeInput.getText().isEmpty() || (datumRodjenjaDate == null)) {
+
+					JOptionPane.showMessageDialog(MainFrame.getInstance(), "Popunite sva polja!");
+				}else {
 				
 				ProfesorController.getInstance().izmeniProfesora(row ,imeInput.getText(), prezimeInput.getText(),datumRodjenjaDate,
 						adresaInput.getText(),telefonInput.getText(),emailInput.getText(), adresaKancelarijeInput.getText(),
 						brojLicneKarteInt,titulaInput.getText(), zvanjeInput.getText());
 				
 				dispose();
+				}
 			}
 		});
 		
@@ -157,6 +166,15 @@ JPanel jp = new JPanel();
 	    container.add(component, gbc);
 	}
 	
-	
+	private MaskFormatter getMaskFormatterDate(String format) {
+		MaskFormatter mask = null;
+		try {
+			mask = new MaskFormatter(format);
+			mask.setPlaceholderCharacter('0');
+		}catch(ParseException ex){
+			ex.printStackTrace();
+		}
+		return mask;
+	}
 
 }

@@ -3,6 +3,7 @@ package model;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
 
 public class BazaProfesor {
@@ -114,8 +115,15 @@ public class BazaProfesor {
 	}
 	
 	public void obrisiProfesora(Profesor profesor) {
-		profesori.remove(profesor);
-		System.out.println(profesori.size());
+		
+		Iterator<Profesor> iter = this.profesori.listIterator();
+		
+		while(iter.hasNext()) {
+			Profesor p = iter.next();
+			if(p == profesor) {
+				iter.remove();
+			}
+		}
 	}
 	
 	public void obrisiPredmetProfesora(Profesor profesor, Predmet predmet) {
@@ -150,5 +158,37 @@ public class BazaProfesor {
 		
 		
 		
+	}
+
+	public void deletePredmetFromEveryProfesor(Predmet predmet) {
+		// TODO Auto-generated method stub
+		
+		Iterator<Profesor> iter = this.profesori.listIterator();
+		
+		while(iter.hasNext()) {
+			Profesor p = iter.next();
+			
+			Iterator<Predmet> iterPredmet = p.getPredmeti().listIterator();
+			
+			while(iterPredmet.hasNext()) {
+				Predmet pr = iterPredmet.next();
+				if(pr == predmet) {
+					iterPredmet.remove();
+				}
+			}
+		}
+	}
+
+	public void ukloniPredmetProfesoru(Profesor prof, Predmet predmet) {
+		// TODO Auto-generated method stub
+		Iterator<Predmet> iter = prof.getPredmeti().listIterator();
+		
+		while(iter.hasNext()) {
+			Predmet p = iter.next();
+			
+			if(p == predmet) {
+				iter.remove();
+			}
+		}
 	}
 }
