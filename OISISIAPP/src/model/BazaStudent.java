@@ -4,6 +4,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
 
 public class BazaStudent {
@@ -78,6 +79,7 @@ private static BazaStudent instance = null;
 	
 	
 	
+	
 	public boolean checkExistance(String index) {
 		for(int i = 0; i < studenti.size(); i++) {
 			if(studenti.get(i).getBrojIndeksa().toUpperCase().equals(index.toUpperCase())) {
@@ -99,10 +101,10 @@ private static BazaStudent instance = null;
 	
 	public void dodajStudenta(String brojIndeksa, String ime , String prezime,Date datumRodjenja,
 					String adresa, String brojTelefona,String email, Date datumUpisa,
-					Integer godinaStudija, Boolean budzet) {
+					Integer godinaStudija, Boolean budzet, Double prosjecnaOcjena) {
 		
 		this.studenti.add(new Student( generateId() , brojIndeksa,ime,prezime,
-				datumRodjenja,adresa,brojTelefona,email,datumUpisa,godinaStudija,budzet	));
+				datumRodjenja,adresa,brojTelefona,email,datumUpisa,godinaStudija,budzet, prosjecnaOcjena));
 		
 	}
 	
@@ -138,7 +140,7 @@ private static BazaStudent instance = null;
 
 	public void izmeniStudenta(int row,String brojIndeksa, String ime , String prezime,Date datumRodjenja,
 			String adresa, String brojTelefona,String email, Date datumUpisa,
-			Integer godinaStudija, Boolean budzet) {
+			Integer godinaStudija, Boolean budzet , Double prosjecnaOcjena) {
 		// TODO Auto-generated method stub
 		
 		Student student = BazaStudent.getInstance().getRow(row);
@@ -153,13 +155,43 @@ private static BazaStudent instance = null;
 		student.setDatumUpisa(datumUpisa);
 		student.setGodinaStudija(godinaStudija);
 		student.setBudzet(budzet);
+		student.setProsjecnaOcjena(prosjecnaOcjena);
 		
 		
 	}
 
 
 	public void obrisiStudenta(Student student) {
-		this.studenti.remove(student);
+		
+		
+		Iterator<Student> iter = this.studenti.listIterator();
+		
+		while(iter.hasNext()) {
+			Student s = iter.next();
+			if(s == student) {
+				iter.remove();
+			}
+		}
+		
+	}
+
+
+	public void deletePredmetFromEveryStudent(Predmet predmet) {
+		// TODO Auto-generated method stub
+		Iterator<Student> iter = this.studenti.listIterator();
+		
+		while(iter.hasNext()) {
+			Student s = iter.next();
+			
+			Iterator<Predmet> iterPredmet = s.getPredmeti().listIterator();
+			
+			while(iterPredmet.hasNext()) {
+				Predmet p = iterPredmet.next();
+				if(p == predmet) {
+					iterPredmet.remove();
+				}
+			}
+		}
 		
 	}
 }

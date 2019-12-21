@@ -3,6 +3,7 @@ package model;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
 
 
@@ -45,7 +46,7 @@ public class Student implements Serializable {
 	public Student(Long id, String brojIndeksa, String ime, 
 			String prezime, Date datumRodjenja, String adresaStanovanja,
 			String brojTelefona, String emailAdresa, Date datumUpisa, 
-			Integer godinaStudija, Boolean budzet
+			Integer godinaStudija, Boolean budzet,Double prosjecnaOcjena
 			 ) {
 		super();
 		this.id = id;
@@ -64,7 +65,7 @@ public class Student implements Serializable {
 		}else {
 			this.status = StatusStudenta.S;
 		}
-		this.prosjecnaOcjena = 0.0;
+		this.prosjecnaOcjena = prosjecnaOcjena;
 	}
 	
 	
@@ -107,6 +108,25 @@ public class Student implements Serializable {
 		this.predmeti = predmeti;
 	}
 
+	
+	public void addPredmetToList(Predmet predmet) {
+		this.predmeti.add(predmet);
+	}
+	
+	public void removePredmetFromList(Predmet predmet) {
+		
+		Iterator<Predmet> iter = this.predmeti.listIterator();
+		
+		while( iter.hasNext()) {
+			Predmet p = iter.next();
+			if(p == predmet) {
+				iter.remove();
+			}
+			
+		}
+		
+		
+	}
 
 
 	public Long getId() {

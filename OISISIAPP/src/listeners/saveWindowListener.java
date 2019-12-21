@@ -18,6 +18,8 @@ import model.BazaStudent;
 import model.Predmet;
 import model.Profesor;
 import model.Student;
+import view.StudentTab;
+import view.StudentiTable;
 
 public class saveWindowListener implements WindowListener {
 
@@ -43,6 +45,7 @@ public class saveWindowListener implements WindowListener {
 			List<Profesor> ucitaniProfesori = (List<Profesor>)ois2.readObject();
 			BazaPredmet.getInstance().setPredmeti(ucitaniPredmeti);
 			BazaStudent.getInstance().setStudenti(ucitaniStudenti);
+			StudentTab.getInstance().azurirajPrikaz();
 			BazaProfesor.getInstance().setProfesori(ucitaniProfesori);
 		} catch (ClassNotFoundException e1) {
 			// TODO Auto-generated catch block

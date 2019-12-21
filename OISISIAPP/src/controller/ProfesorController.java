@@ -2,6 +2,7 @@ package controller;
 
 import java.util.Date;
 
+import model.BazaPredmet;
 import model.BazaProfesor;
 import model.Profesor;
 import view.ProfesorTab;
@@ -30,6 +31,9 @@ public class ProfesorController {
 		Profesor profesor = BazaProfesor.getInstance().getRow(selectedRow);
 		System.out.println(profesor.getIme());
 		BazaProfesor.getInstance().obrisiProfesora(profesor);
+		
+		BazaPredmet.getInstance().obrisiProfesoraSaSvihPredmeta(profesor);
+		
 		ProfesorTab.getInstance().azurirajPrikaz();
 	}
 

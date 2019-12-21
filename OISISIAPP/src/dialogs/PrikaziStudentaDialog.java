@@ -8,9 +8,12 @@ import java.awt.Insets;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 
+import javax.swing.DefaultListModel;
 import javax.swing.JDialog;
 import javax.swing.JFormattedTextField;
 import javax.swing.JLabel;
+import javax.swing.JList;
+import javax.swing.JScrollPane;
 
 import model.BazaStudent;
 import model.Student;
@@ -26,9 +29,8 @@ public class PrikaziStudentaDialog extends JDialog{
 		this.setLayout(new GridBagLayout());
 		Insets insets = new Insets(10,10,10,10);
 		
-		JLabel ime = new JLabel("Ime: " + student.getIme());
-		JLabel prezime = new JLabel("Prezime: " + student.getPrezime());
-		
+		JLabel ime = new JLabel("Ime i prezime: " + student.getIme() + " " + student.getPrezime());
+
 		JLabel adresa = new JLabel("Adresa: " + student.getAdresaStanovanja());
 		JLabel email = new JLabel("Email: " + student.getEmailAdresa());
 		JLabel telefon = new JLabel("Telefon: " + student.getBrojTelefona());
@@ -54,16 +56,23 @@ public class PrikaziStudentaDialog extends JDialog{
 		JLabel statusSt = new JLabel("Status: " +  status);
 		
 		addComponent(this, ime, 0, 0, 1, 1, GridBagConstraints.NORTH, GridBagConstraints.HORIZONTAL, insets, 0.1, 1.0);
-		addComponent(this, prezime, 0, 1, 1, 1, GridBagConstraints.NORTH, GridBagConstraints.HORIZONTAL, insets, 0.1, 1.0);
-		addComponent(this, datumRodjenja, 0, 2, 1, 1, GridBagConstraints.NORTH, GridBagConstraints.HORIZONTAL, insets, 0.1, 1.0);
-		addComponent(this, adresa, 0, 3, 1, 1, GridBagConstraints.NORTH, GridBagConstraints.HORIZONTAL, insets, 0.1, 1.0);
-		addComponent(this, email, 0, 4, 1, 1, GridBagConstraints.NORTH, GridBagConstraints.HORIZONTAL, insets, 0.1, 1.0);
-		addComponent(this, telefon, 0, 5, 1, 1, GridBagConstraints.NORTH, GridBagConstraints.HORIZONTAL, insets, 0.1, 1.0);
-		addComponent(this, datumUpisa, 0, 6, 1, 1, GridBagConstraints.NORTH, GridBagConstraints.HORIZONTAL, insets, 0.1, 1.0);
-		addComponent(this, godStud, 0, 7, 1, 1, GridBagConstraints.NORTH, GridBagConstraints.HORIZONTAL, insets, 0.1, 1.0);
-		addComponent(this, brIndeksa, 0, 8, 1, 1, GridBagConstraints.NORTH, GridBagConstraints.HORIZONTAL, insets, 0.1, 1.0);
-		addComponent(this, statusSt, 0, 9, 1, 1, GridBagConstraints.NORTH, GridBagConstraints.HORIZONTAL, insets, 0.1, 1.0);
+		addComponent(this, datumRodjenja, 0, 1, 1, 1, GridBagConstraints.NORTH, GridBagConstraints.HORIZONTAL, insets, 0.1, 1.0);
+		addComponent(this, telefon, 1, 0, 1, 1, GridBagConstraints.NORTH, GridBagConstraints.HORIZONTAL, insets, 0.1, 1.0);
+		addComponent(this, email, 1, 1, 1, 1, GridBagConstraints.NORTH, GridBagConstraints.HORIZONTAL, insets, 0.1, 1.0);
+		addComponent(this, adresa, 0, 2, 1, 1, GridBagConstraints.NORTH, GridBagConstraints.HORIZONTAL, insets, 0.1, 1.0);
+		addComponent(this, datumUpisa, 0, 3, 1, 1, GridBagConstraints.NORTH, GridBagConstraints.HORIZONTAL, insets, 0.1, 1.0);
+		addComponent(this, godStud, 1, 3, 2, 1, GridBagConstraints.NORTH, GridBagConstraints.HORIZONTAL, insets, 0.1, 1.0);
+		addComponent(this, brIndeksa, 0, 4, 1, 1, GridBagConstraints.NORTH, GridBagConstraints.HORIZONTAL, insets, 0.1, 1.0);
+		addComponent(this, statusSt, 1, 4, 2, 1, GridBagConstraints.NORTH, GridBagConstraints.HORIZONTAL, insets, 0.1, 1.0);
 		
+		DefaultListModel<String> model = new DefaultListModel<>();
+		student.getPredmeti().forEach(p ->{
+			model.addElement(p.getNaziv());
+		});
+		JList<String> lista = new JList<>();
+		lista.setModel(model);
+		
+		addComponent(this, new JScrollPane(lista), 0, 5, 3,1, GridBagConstraints.NORTH, GridBagConstraints.HORIZONTAL, insets, 0.1, 1.0);
 		
 		setSize(400,450);
 		setLocationRelativeTo(MainFrame.getInstance());

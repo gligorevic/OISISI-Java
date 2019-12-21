@@ -19,12 +19,15 @@ import javax.swing.JCheckBox;
 import javax.swing.JDialog;
 import javax.swing.JFormattedTextField;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JSpinner;
 import javax.swing.JTextField;
+import javax.swing.JWindow;
 import javax.swing.SpinnerModel;
 import javax.swing.SpinnerNumberModel;
+import javax.swing.text.MaskFormatter;
 
 import controller.PredmetController;
 import controller.StudentController;
@@ -45,8 +48,11 @@ public class DodajStudentaDialog extends JDialog {
 		this.setLayout(new GridBagLayout());
 		setSize(400,500);
 		
-		SpinnerModel godinaStudijaModel = new SpinnerNumberModel(1 , 1 , 5 , 1);
+		SpinnerModel godinaStudijaModel = new SpinnerNumberModel(1 , 1 , 9 , 1);
 		
+
+		JButton potvrdi = new JButton("Potvrdi");
+	
 		JLabel ime = new JLabel("Ime: ");
 		JLabel prezime = new JLabel("Prezime: ");
 		JLabel datumRodjenja= new JLabel("Datum Rodjenja: ");
@@ -56,7 +62,8 @@ public class DodajStudentaDialog extends JDialog {
 		JLabel brIndexa= new JLabel("Broj indexa: ");
 		JLabel datumUpisa= new JLabel("Datum Upisa: ");
 		JLabel godinaStudija = new JLabel("Godina studija: ");
-		JLabel status = new JLabel("Status:");
+		JLabel status = new JLabel("Status: ");
+		JLabel avgOcjena = new JLabel("Prosjecna ocjena: ");
 		
 		Insets insets = new Insets(10,0,0,0);
 		
@@ -70,6 +77,9 @@ public class DodajStudentaDialog extends JDialog {
 		addComponent(this, datumUpisa ,0,7,1,1,GridBagConstraints.NORTH , GridBagConstraints.HORIZONTAL, insets, 0.1,1.0);
 		addComponent(this, godinaStudija ,0,8,1,1,GridBagConstraints.NORTH , GridBagConstraints.HORIZONTAL, insets, 0.1,1.0);
 		addComponent(this, status ,0,9,1,1,GridBagConstraints.NORTH , GridBagConstraints.HORIZONTAL, insets, 0.1,1.0);
+		addComponent(this, avgOcjena ,0,10,1,1,GridBagConstraints.NORTH , GridBagConstraints.HORIZONTAL, insets, 0.1,1.0);
+		
+		
 		
 		JTextField imeInput = new JTextField(); //0
 		JTextField prezimeInput = new JTextField();//1
@@ -79,10 +89,10 @@ public class DodajStudentaDialog extends JDialog {
 		JTextField indeksInput = new JTextField();//6
 		JSpinner godinaStudijaInput = new JSpinner(godinaStudijaModel);//8
 		
-		DateFormat formatDatuma = new SimpleDateFormat("dd-mm-yyyy");
-		JFormattedTextField datumRodjenjaInput = new JFormattedTextField(formatDatuma);
-		JFormattedTextField datumUpisaInput = new JFormattedTextField(formatDatuma);
-	
+		//DateFormat formatDatuma = new SimpleDateFormat("dd-mm-yyyy");
+		JFormattedTextField datumRodjenjaInput = new JFormattedTextField(getMaskFormatterDate("##-##-####"));
+		JFormattedTextField datumUpisaInput = new JFormattedTextField(getMaskFormatterDate("##-##-####"));
+		JFormattedTextField avgOcjenaInput = new JFormattedTextField(getMaskFormatter("#.##"));
 		
 		JCheckBox statusStudentaInput = new JCheckBox("Budzet" , false);
 	
@@ -96,14 +106,13 @@ public class DodajStudentaDialog extends JDialog {
 		addComponent(this, datumUpisaInput, 1, 7, 2, 1, GridBagConstraints.NORTH, GridBagConstraints.HORIZONTAL, insets, 100.0, 1.0);
 		addComponent(this, godinaStudijaInput, 1, 8, 2, 1, GridBagConstraints.NORTH, GridBagConstraints.HORIZONTAL, insets, 100.0, 1.0);
 		addComponent(this, statusStudentaInput, 1, 9, 2, 1, GridBagConstraints.NORTH, GridBagConstraints.HORIZONTAL, insets, 100.0, 1.0);
-		
+		addComponent(this, avgOcjenaInput, 1, 10, 2, 1, GridBagConstraints.NORTH, GridBagConstraints.HORIZONTAL, insets, 100.0, 1.0);
 		
 		
 		
 		JPanel jp = new JPanel();
 		
 		JButton nazad = new JButton("Nazad");
-		JButton potvrdi = new JButton("Potvrdi");
 		
 		nazad.setPreferredSize(new Dimension(75, 30));
 
@@ -138,13 +147,23 @@ public class DodajStudentaDialog extends JDialog {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
+				double prosjecnaOcjena = Double.parseDouble(avgOcjenaInput.getText());
 				
+				if(indeksInput.getText().isEmpty() || 
+						imeInput.getText().isEmpty()|| prezimeInput.getText().isEmpty()|| adresaInput.getText().isEmpty() || telefonInput.getText().isEmpty() ||
+						emailInput.getText().isEmpty() ) {
+					JOptionPane.showMessageDialog(MainFrame.getInstance(), "Popunite sva polja!");
+			
+				}else  if( (prosjecnaOcjena < 6.0) || (prosjecnaOcjena > 10.0)){
+					JOptionPane.showMessageDialog(MainFrame.getInstance(), "Prosjecna ocjena mora da bude izmedju 6.0 i 10.0!");
+				}else  {
 				StudentController.getInstance().dodajStudenta(indeksInput.getText(), 
 						imeInput.getText(), prezimeInput.getText(),datumRodjenjaDate,adresaInput.getText(),telefonInput.getText(),
 						emailInput.getText(),datumUpisaDate,(Integer)godinaStudijaInput.getValue(),
-						statusStudentaInput.isSelected());
+						statusStudentaInput.isSelected() , prosjecnaOcjena);
 				
 				dispose();
+				}
 			}
 		});
 		
@@ -152,7 +171,7 @@ public class DodajStudentaDialog extends JDialog {
 		jp.add(nazad);
 		jp.add(potvrdi);
 		
-		addComponent(this, jp, 2, 10, 1, 1, GridBagConstraints.NORTH, GridBagConstraints.HORIZONTAL, insets, 0.0, 1.0);
+		addComponent(this, jp, 2, 11, 1, 1, GridBagConstraints.NORTH, GridBagConstraints.HORIZONTAL, insets, 0.0, 1.0);
 		
 		
 		
@@ -166,4 +185,25 @@ public class DodajStudentaDialog extends JDialog {
 	    container.add(component, gbc);
 	}
 	
+	private MaskFormatter getMaskFormatter(String format) {
+	    MaskFormatter mask = null;
+	    try {
+	        mask = new MaskFormatter(format);
+	        mask.setPlaceholderCharacter('0');
+	    }catch (ParseException ex) {
+	        ex.printStackTrace();
+	    }
+	    return mask;
+	}
+	
+	private MaskFormatter getMaskFormatterDate(String format) {
+		MaskFormatter mask = null;
+		try {
+			mask = new MaskFormatter(format);
+			mask.setPlaceholderCharacter('0');
+		}catch(ParseException ex){
+			ex.printStackTrace();
+		}
+		return mask;
+	}
 }

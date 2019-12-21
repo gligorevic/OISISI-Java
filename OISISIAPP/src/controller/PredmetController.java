@@ -1,7 +1,11 @@
 package controller;
 
 import model.BazaPredmet;
+import model.BazaProfesor;
+import model.BazaStudent;
 import model.Predmet;
+import model.Profesor;
+import model.Student;
 import view.PredmetTab;
 
 public class PredmetController {
@@ -31,18 +35,29 @@ public class PredmetController {
 	public void obrisiPredmet(int selectedRow) {
 		Predmet predmet = BazaPredmet.getInstance().getRow(selectedRow);
 		BazaPredmet.getInstance().obrisiPredmet(predmet);
+
+		BazaStudent.getInstance().deletePredmetFromEveryStudent(predmet);
+		BazaProfesor.getInstance().deletePredmetFromEveryProfesor(predmet);
 		PredmetTab.getInstance().azurirajPrikaz();
+		
 	}
 	
 	public void ukloniProfu(int selectedRow) {
 		Predmet predmet = BazaPredmet.getInstance().getRow(selectedRow);
+		Profesor prof = predmet.getProfesor();
+		
 		BazaPredmet.getInstance().ukloniProfu(predmet);
+		BazaProfesor.getInstance().ukloniPredmetProfesoru(prof,predmet);
+		
 		PredmetTab.getInstance().azurirajPrikaz();
 	}
 	
 	public void dodajStudenta(int selectedRow, String index) {
 		Predmet predmet = BazaPredmet.getInstance().getRow(selectedRow);	
 		BazaPredmet.getInstance().dodajStudenta(predmet, index);
+		
+		Student student = BazaStudent.getInstance().getStudentByIndex(index);
+		student.addPredmetToList(predmet);
 		PredmetTab.getInstance().azurirajPrikaz();
 	}
 	
@@ -56,5 +71,8 @@ public class PredmetController {
 	public void ukloniStudenta(String index) {
 		Predmet predmet = BazaPredmet.getInstance().getRow(PredmetTab.getInstance().getSelectedRow());
 		BazaPredmet.getInstance().ukloniStudenta(predmet, index);
+		
+		Student student = BazaStudent.getInstance().getStudentByIndex(index);
+		student.removePredmetFromList(predmet);
 	}
 } 
