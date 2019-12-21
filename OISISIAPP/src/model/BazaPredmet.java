@@ -103,15 +103,14 @@ public class BazaPredmet {
 	}
 	
 	public void obrisiPredmet(Predmet predmet) {
-		
-		Iterator<Predmet> iter = this.predmeti.listIterator();
-		
-		while(iter.hasNext()) {
-			Predmet p = iter.next();
-			if(p == predmet) {
-				iter.remove();
+		for(int i = 0; i < predmeti.size(); i++) {
+			if(predmeti.get(i).getId().equals(predmet.getId())) {
+				predmeti.remove(i);
+				break;
 			}
 		}
+		BazaProfesor.getInstance().obrisiPredmetProfesora(predmet.getProfesor(), predmet);
+		
 	}
 	
 	public void ukloniProfu(Predmet predmet) {
@@ -144,21 +143,17 @@ public class BazaPredmet {
 	}
 
 	public void obrisiStudentaSaSvihPredmeta(Student student) {
-		// TODO Auto-generated method stub
-		Iterator<Predmet> iter = this.predmeti.listIterator();
-		
-		while(iter.hasNext()) {
-			Predmet p = iter.next();
-			
-			Iterator<Student> iterStudent = p.getStudenti().listIterator();
-			
-			while(iterStudent.hasNext()) {
-				Student s = iterStudent.next();
-				if(s == student) {
-					iterStudent.remove();
+
+		for(int i = 0; i < predmeti.size(); i++) {
+			for(int j = 0; j < predmeti.get(i).getStudenti().size(); j++) {
+				if(predmeti.get(i).getStudenti().get(j).getId()
+						.equals(student.getId())) {
+					predmeti.get(i).getStudenti().remove(j);
+					break;
 				}
 			}
-		}
+			
+		}	
 	}
 
 	public void obrisiProfesoraSaSvihPredmeta(Profesor profesor) {
@@ -168,8 +163,8 @@ public class BazaPredmet {
 		while(iter.hasNext()) {
 			Predmet p = iter.next();
 
-			if(p.getProfesor() == profesor) {
-				this.ukloniProfu(p);
+			if(p.getProfesor().getId() == profesor.getId()) {
+				p.setProfesor(null);
 			}
 		}
 	}
