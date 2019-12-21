@@ -127,7 +127,24 @@ public class BazaProfesor {
 	}
 	
 	public void obrisiPredmetProfesora(Profesor profesor, Predmet predmet) {
-		profesor.getPredmeti().remove(predmet);
+		Profesor p = null;
+		System.out.println(profesori.size());
+		if(profesor != null) {
+			for(int i = 0; i < profesori.size(); i++) {
+				if(profesori.get(i).getId().equals(profesor.getId())) {
+					p = profesori.get(i);
+					break;
+				}
+			}
+			
+			for(int i = 0; i < p.getPredmeti().size(); i++) {
+				if(p.getPredmeti().get(i).getId().equals(predmet.getId())) {
+					System.out.println("brisem");
+					p.getPredmeti().remove(i);
+					break;
+				}
+			}
+		}
 	}
 
 	public void dodajProfesora(String ime, String prezime, Date datumRodjenja, String adresa, String brojTelefona,

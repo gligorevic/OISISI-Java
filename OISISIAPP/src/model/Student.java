@@ -115,17 +115,12 @@ public class Student implements Serializable {
 	
 	public void removePredmetFromList(Predmet predmet) {
 		
-		Iterator<Predmet> iter = this.predmeti.listIterator();
-		
-		while( iter.hasNext()) {
-			Predmet p = iter.next();
-			if(p == predmet) {
-				iter.remove();
+		for(int i = 0; i < predmeti.size(); i++) {
+			if(predmeti.get(i).getId().equals(predmet.getId())) {
+				predmeti.remove(i);
+				break;
 			}
-			
 		}
-		
-		
 	}
 
 

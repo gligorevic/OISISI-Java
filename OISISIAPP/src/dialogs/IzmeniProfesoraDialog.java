@@ -96,7 +96,7 @@ public class IzmeniProfesoraDialog extends JDialog{
 		addComponent(this, titulaInput, 1, 8, 2, 1, GridBagConstraints.NORTH, GridBagConstraints.HORIZONTAL, insets, 100.0, 1.0);
 		addComponent(this, zvanjeInput, 1, 9, 2, 1, GridBagConstraints.NORTH, GridBagConstraints.HORIZONTAL, insets, 100.0, 1.0);
 		
-JPanel jp = new JPanel();
+		JPanel jp = new JPanel();
 		
 		JButton nazad = new JButton("Nazad");
 		JButton potvrdi = new JButton("Potvrdi");

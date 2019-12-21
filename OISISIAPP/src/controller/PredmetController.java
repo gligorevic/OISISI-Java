@@ -37,7 +37,6 @@ public class PredmetController {
 		BazaPredmet.getInstance().obrisiPredmet(predmet);
 
 		BazaStudent.getInstance().deletePredmetFromEveryStudent(predmet);
-		BazaProfesor.getInstance().deletePredmetFromEveryProfesor(predmet);
 		PredmetTab.getInstance().azurirajPrikaz();
 		
 	}

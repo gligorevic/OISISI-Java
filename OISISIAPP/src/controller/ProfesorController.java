@@ -29,7 +29,6 @@ public class ProfesorController {
 	
 	public void obrisiProfesora(int selectedRow) {
 		Profesor profesor = BazaProfesor.getInstance().getRow(selectedRow);
-		System.out.println(profesor.getIme());
 		BazaProfesor.getInstance().obrisiProfesora(profesor);
 		
 		BazaPredmet.getInstance().obrisiProfesoraSaSvihPredmeta(profesor);

@@ -177,7 +177,16 @@ private static BazaStudent instance = null;
 
 
 	public void deletePredmetFromEveryStudent(Predmet predmet) {
-		// TODO Auto-generated method stub
+		
+		for(int i = 0; i < studenti.size(); i++) {
+			for(int j = 0; i < studenti.get(i).getPredmeti().size(); j++) {
+				if(studenti.get(i).getPredmeti().get(j).getId().equals(predmet.getId())) {
+					studenti.get(i).getPredmeti().remove(j);
+					break;
+				}
+			}
+		}
+		
 		Iterator<Student> iter = this.studenti.listIterator();
 		
 		while(iter.hasNext()) {
@@ -187,7 +196,7 @@ private static BazaStudent instance = null;
 			
 			while(iterPredmet.hasNext()) {
 				Predmet p = iterPredmet.next();
-				if(p == predmet) {
+				if(p.getId() == predmet.getId()) {
 					iterPredmet.remove();
 				}
 			}
