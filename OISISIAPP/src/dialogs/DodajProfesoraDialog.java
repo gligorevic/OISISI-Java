@@ -8,6 +8,8 @@ import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -38,6 +40,10 @@ public class DodajProfesoraDialog extends JDialog {
 		this.setLayout(new GridBagLayout());
 		
 		setSize(400,500);
+		
+
+		JButton potvrdi = new JButton("Potvrdi");
+		potvrdi.setEnabled(false);
 		
 		JLabel ime = new JLabel("Ime: ");
 		JLabel prezime = new JLabel("Prezime: ");
@@ -77,6 +83,38 @@ public class DodajProfesoraDialog extends JDialog {
 		JFormattedTextField datumRodjenjaInput = new JFormattedTextField(getMaskFormatterDate("##-##-####"));
 		
 		
+		FocusListener myFocusListener = new FocusListener() {
+
+			@Override
+			public void focusGained(FocusEvent arg0) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void focusLost(FocusEvent arg0) {
+				// TODO Auto-generated method stub
+				if(!(imeInput.getText().isEmpty() || prezimeInput.getText().isEmpty() ||
+					adresaInput.getText().isEmpty() || telefonInput.getText().isEmpty() || emailInput.getText().isEmpty() || adresaKancelarijeInput.getText().isEmpty() ||
+					brLicneKarteInput.getText().isEmpty() || titulaInput.getText().isEmpty() || zvanjeInput.getText().isEmpty() ) ) {
+					
+					potvrdi.setEnabled(true);
+				}
+			}
+			
+		};
+		
+		
+		imeInput.addFocusListener(myFocusListener);
+		prezimeInput.addFocusListener(myFocusListener);
+		adresaInput.addFocusListener(myFocusListener);
+		telefonInput.addFocusListener(myFocusListener);
+		emailInput.addFocusListener(myFocusListener);
+		adresaKancelarijeInput.addFocusListener(myFocusListener);
+		brLicneKarteInput.addFocusListener(myFocusListener);
+		titulaInput.addFocusListener(myFocusListener);
+		zvanjeInput.addFocusListener(myFocusListener);
+		
 		addComponent(this, imeInput, 1, 0, 2, 1, GridBagConstraints.NORTH, GridBagConstraints.HORIZONTAL, insets, 100.0, 1.0);
 		addComponent(this, prezimeInput, 1, 1, 2, 1, GridBagConstraints.NORTH, GridBagConstraints.HORIZONTAL, insets, 100.0, 1.0);
 		addComponent(this, datumRodjenjaInput, 1, 2, 2, 1, GridBagConstraints.NORTH, GridBagConstraints.HORIZONTAL, insets, 100.0, 1.0);
@@ -91,7 +129,6 @@ public class DodajProfesoraDialog extends JDialog {
 		JPanel jp = new JPanel();
 		
 		JButton nazad = new JButton("Nazad");
-		JButton potvrdi = new JButton("Potvrdi");
 		
 		nazad.setPreferredSize(new Dimension(75, 30));
 
@@ -123,20 +160,13 @@ public class DodajProfesoraDialog extends JDialog {
 				
 				
 				int  brojLicneKarteInt = Integer.parseInt(brLicneKarteInput.getText());
-				if(imeInput.getText().isEmpty() || prezimeInput.getText().isEmpty() ||
-						adresaInput.getText().isEmpty() || telefonInput.getText().isEmpty() || emailInput.getText().isEmpty() || adresaKancelarijeInput.getText().isEmpty() ||
-						((Integer)brojLicneKarteInt == null)  || titulaInput.getText().isEmpty() || zvanjeInput.getText().isEmpty() || (datumRodjenjaDate == null)) {
-
-					JOptionPane.showMessageDialog(MainFrame.getInstance(), "Popunite sva polja!");
-				}
-				else {
-					ProfesorController.getInstance().dodajProfesora(imeInput.getText(), prezimeInput.getText(),datumRodjenjaDate,
+				
+				ProfesorController.getInstance().dodajProfesora(imeInput.getText(), prezimeInput.getText(),datumRodjenjaDate,
 							adresaInput.getText(),telefonInput.getText(),emailInput.getText(), adresaKancelarijeInput.getText(),
 							brojLicneKarteInt,titulaInput.getText(), zvanjeInput.getText());
-					dispose();
-					
-				}
-				
+			
+				dispose();
+			
 				
 			}
 		});

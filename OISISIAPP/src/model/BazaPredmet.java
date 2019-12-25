@@ -2,7 +2,6 @@ package model;
 
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.Iterator;
 import java.util.List;
 
 public class BazaPredmet {
@@ -158,13 +157,9 @@ public class BazaPredmet {
 
 	public void obrisiProfesoraSaSvihPredmeta(Profesor profesor) {
 		// TODO Auto-generated method stub
-		Iterator<Predmet> iter = this.predmeti.listIterator();
-		
-		while(iter.hasNext()) {
-			Predmet p = iter.next();
-
-			if(p.getProfesor().getId() == profesor.getId()) {
-				p.setProfesor(null);
+		for(int i = 0 ; i < predmeti.size() ; i++) {
+			if(predmeti.get(i).getProfesor().getId().equals(profesor.getId())){
+				predmeti.get(i).setProfesor(null);
 			}
 		}
 	}

@@ -120,7 +120,7 @@ public class BazaProfesor {
 		
 		while(iter.hasNext()) {
 			Profesor p = iter.next();
-			if(p == profesor) {
+			if(p.getId().equals(profesor.getId())) {
 				iter.remove();
 			}
 		}
