@@ -8,6 +8,10 @@ import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -52,7 +56,9 @@ public class DodajStudentaDialog extends JDialog {
 		
 
 		JButton potvrdi = new JButton("Potvrdi");
-	
+		potvrdi.setEnabled(false);
+		
+		
 		JLabel ime = new JLabel("Ime: ");
 		JLabel prezime = new JLabel("Prezime: ");
 		JLabel datumRodjenja= new JLabel("Datum Rodjenja: ");
@@ -96,6 +102,36 @@ public class DodajStudentaDialog extends JDialog {
 		
 		JCheckBox statusStudentaInput = new JCheckBox("Budzet" , false);
 	
+		FocusListener myFocusListener = new FocusListener() {
+
+			@Override
+			public void focusGained(FocusEvent arg0) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void focusLost(FocusEvent arg0) {
+				// TODO Auto-generated method stub
+				if(!(indeksInput.getText().isEmpty() || 
+						imeInput.getText().isEmpty()|| prezimeInput.getText().isEmpty()|| adresaInput.getText().isEmpty() || telefonInput.getText().isEmpty() ||
+						emailInput.getText().isEmpty()) ) {
+					
+					potvrdi.setEnabled(true);
+				}
+			}
+			
+		};
+		
+		
+		imeInput.addFocusListener(myFocusListener);
+		prezimeInput.addFocusListener(myFocusListener);
+		adresaInput.addFocusListener(myFocusListener);
+		telefonInput.addFocusListener(myFocusListener);
+		emailInput.addFocusListener(myFocusListener);
+		indeksInput.addFocusListener(myFocusListener);
+		godinaStudijaInput.addFocusListener(myFocusListener);
+		
 		addComponent(this, imeInput, 1, 0, 2, 1, GridBagConstraints.NORTH, GridBagConstraints.HORIZONTAL, insets, 100.0, 1.0);
 		addComponent(this, prezimeInput, 1, 1, 2, 1, GridBagConstraints.NORTH, GridBagConstraints.HORIZONTAL, insets, 100.0, 1.0);
 		addComponent(this, datumRodjenjaInput, 1, 2, 2, 1, GridBagConstraints.NORTH, GridBagConstraints.HORIZONTAL, insets, 100.0, 1.0);
@@ -149,12 +185,7 @@ public class DodajStudentaDialog extends JDialog {
 				}
 				double prosjecnaOcjena = Double.parseDouble(avgOcjenaInput.getText());
 				
-				if(indeksInput.getText().isEmpty() || 
-						imeInput.getText().isEmpty()|| prezimeInput.getText().isEmpty()|| adresaInput.getText().isEmpty() || telefonInput.getText().isEmpty() ||
-						emailInput.getText().isEmpty() ) {
-					JOptionPane.showMessageDialog(MainFrame.getInstance(), "Popunite sva polja!");
-			
-				}else  if( (prosjecnaOcjena < 6.0) || (prosjecnaOcjena > 10.0)){
+				if( (prosjecnaOcjena < 6.0) || (prosjecnaOcjena > 10.0)){
 					JOptionPane.showMessageDialog(MainFrame.getInstance(), "Prosjecna ocjena mora da bude izmedju 6.0 i 10.0!");
 				}else  {
 				StudentController.getInstance().dodajStudenta(indeksInput.getText(), 

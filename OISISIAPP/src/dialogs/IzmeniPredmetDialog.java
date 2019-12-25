@@ -10,6 +10,8 @@ import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
 
 import javax.swing.JButton;
 import javax.swing.JDialog;
@@ -33,7 +35,11 @@ public class IzmeniPredmetDialog extends JDialog {
 		super(MainFrame.getInstance(), "Izmeni predmet", true);
 		
 		Predmet predmet = BazaPredmet.getInstance().getRow(id);
-			
+		
+
+		JButton potvrdi = new JButton("Potvrdi");
+		potvrdi.setEnabled(false);
+		
 		this.setLayout(new GridBagLayout());
 		
 		Integer value1 = new Integer(predmet.getSemestar());
@@ -90,6 +96,29 @@ public class IzmeniPredmetDialog extends JDialog {
 		JSpinner semestarInput = new JSpinner(model1);
 		JSpinner godinaStudInput = new JSpinner(model2);
 		
+		FocusListener myFocusListener = new FocusListener() {
+
+			@Override
+			public void focusGained(FocusEvent arg0) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void focusLost(FocusEvent arg0) {
+				// TODO Auto-generated method stub
+				if(!(sifraInput.getText().isEmpty() || nazivInput.getText().isEmpty()) ) {
+					
+					potvrdi.setEnabled(true);
+				}
+			}
+			
+		};
+		
+		sifraInput.addFocusListener(myFocusListener);
+		nazivInput.addFocusListener(myFocusListener);
+		
+		
 		addComponent(this, sifraInput, 1, 0, 2, 1, GridBagConstraints.NORTH, GridBagConstraints.HORIZONTAL, insets, 100.0, 1.0);
 		addComponent(this, nazivInput, 1, 1, 2, 1, GridBagConstraints.NORTH, GridBagConstraints.HORIZONTAL, insets, 100.0, 1.0);
 		addComponent(this, semestarInput, 1, 2, 2, 1, GridBagConstraints.NORTH, GridBagConstraints.HORIZONTAL, insets, 100.0, 1.0);
@@ -98,7 +127,6 @@ public class IzmeniPredmetDialog extends JDialog {
 		JPanel jp = new JPanel();
 		
 		JButton nazad = new JButton("Nazad");
-		JButton potvrdi = new JButton("Potvrdi");
 		
 		nazad.setPreferredSize(new Dimension(75, 30));
 		potvrdi.setPreferredSize(new Dimension(75, 30));

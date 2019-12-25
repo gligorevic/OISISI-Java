@@ -39,9 +39,6 @@ private static BazaStudent instance = null;
 	
 	private void initStudente() {
 		this.studenti = new ArrayList<Student>();
-		this.studenti.add(new Student(generateId(), "RA-99-2016", "Igor", "Gligorevic", new Date(), "Vojvodjanskih brigada 4", "123-456", "igor.gligorevic@hotmail.com", new Date(), 4, false, StatusStudenta.S, 8.0));
-		this.studenti.add(new Student(generateId(), "RA-98-2018", "Pera", "Peric", new Date(), "Novosadskog sajma 4", "654-321", "peraperic@hotmail.com", new Date(), 2, true, StatusStudenta.B, 9.0));
-		this.studenti.add(new Student(generateId(), "RA-97-2017", "Miki", "Veliki", new Date(), "Masarikova 2", "654-123", "mikiveliki@hotmail.com", new Date(), 3, true, StatusStudenta.B, 6.0));
 	}
 	
 	private long generateId() {
