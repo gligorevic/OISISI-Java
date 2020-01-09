@@ -1,7 +1,4 @@
 package mainpackage;
-
-import model.BazaProfesor;
-import model.BazaStudent;
 import view.MainFrame;
 
 public class MainApp {

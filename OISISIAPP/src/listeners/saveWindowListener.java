@@ -19,7 +19,6 @@ import model.Predmet;
 import model.Profesor;
 import model.Student;
 import view.StudentTab;
-import view.StudentiTable;
 
 public class saveWindowListener implements WindowListener {
 

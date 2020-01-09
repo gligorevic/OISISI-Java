@@ -9,24 +9,22 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import java.util.regex.Pattern;
-
-import javax.swing.InputVerifier;
 import javax.swing.JButton;
-import javax.swing.JComponent;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 
 import controller.PredmetController;
 import controller.ProfesorController;
-import controller.StudentController;
-import model.BazaPredmet;
-import model.Predmet;
 import view.MainFrame;
 import view.PredmetTab;
 
 public class DodajProfesoraNaPredmetDijalog extends JDialog {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -5455019655138223675L;
 
 	public DodajProfesoraNaPredmetDijalog() {
 		super(MainFrame.getInstance(), "Dodaj profesora", true);

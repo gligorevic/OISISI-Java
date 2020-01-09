@@ -23,8 +23,6 @@ import listeners.IzmeniStudentaListener;
 import listeners.ObrisiPredmetListener;
 import listeners.ObrisiStudentaListener;
 import listeners.ObrisiProfesoraListener;
-import model.Profesor;
-
 
 public class Toolbar extends JToolBar {
 	/**

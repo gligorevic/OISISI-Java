@@ -13,17 +13,19 @@ import java.awt.event.KeyListener;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
-import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import controller.PredmetController;
 import controller.StudentController;
-import model.BazaPredmet;
-import model.Predmet;
 import view.MainFrame;
 import view.PredmetTab;
 
 public class DodajStudentaNaPredmetDijalog extends JDialog {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -5605791297728587814L;
 
 	public DodajStudentaNaPredmetDijalog() {
 		super(MainFrame.getInstance(), "Dodaj studenta na predmet", true);

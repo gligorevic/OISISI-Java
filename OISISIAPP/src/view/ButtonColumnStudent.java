@@ -11,12 +11,14 @@ import javax.swing.JButton;
 import javax.swing.JTable;
 import javax.swing.table.TableCellEditor;
 import javax.swing.table.TableCellRenderer;
-
-import dialogs.PrikaziProfesoraDialog;
 import dialogs.PrikaziStudentaDialog;
 
 public class ButtonColumnStudent extends AbstractCellEditor implements TableCellRenderer, TableCellEditor, MouseListener {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 7167866820768554264L;
 	private JTable table;
 	private JButton renderButton;
 	private JButton editorButton;
