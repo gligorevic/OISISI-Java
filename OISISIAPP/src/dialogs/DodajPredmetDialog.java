@@ -21,11 +21,14 @@ import javax.swing.SpinnerModel;
 import javax.swing.SpinnerNumberModel;
 
 import controller.PredmetController;
-import model.BazaPredmet;
-import model.Predmet;
 import view.MainFrame;
 
 public class DodajPredmetDialog extends JDialog {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 147726056611265314L;
+
 	public DodajPredmetDialog() {
 		super(MainFrame.getInstance(), "Dodaj predmet", true);
 				

@@ -32,7 +32,7 @@ public class StudentTab extends JPanel {
 	private StudentiTable studentiTable;
 	private TableRowSorter<AbstractTableModelStudenti> sorter;
 	
-	public StudentTab() {
+	private StudentTab() {
 		this.setLayout(new BorderLayout());
 		this.setBorder(new EmptyBorder(70, 100, 100, 100));
 		studentiTable = new StudentiTable();

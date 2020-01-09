@@ -10,13 +10,15 @@ import java.util.Map;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.RowFilter;
-import javax.swing.RowSorter;
-import javax.swing.SortOrder;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.TableRowSorter;
 
 public class PredmetTab extends JPanel {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1523380528366386958L;
 	private static PredmetTab instance = null;
 	
 	public static PredmetTab getInstance() {

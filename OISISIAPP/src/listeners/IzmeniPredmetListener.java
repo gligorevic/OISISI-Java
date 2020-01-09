@@ -8,7 +8,6 @@ import javax.swing.JOptionPane;
 import dialogs.IzmeniPredmetDialog;
 import view.MainFrame;
 import view.PredmetTab;
-import view.PredmetiTable;
 
 public class IzmeniPredmetListener implements ActionListener {
 

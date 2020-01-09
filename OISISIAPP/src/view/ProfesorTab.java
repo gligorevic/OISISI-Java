@@ -10,8 +10,6 @@ import java.util.Map;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.RowFilter;
-import javax.swing.RowSorter;
-import javax.swing.SortOrder;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.TableRowSorter;
 
@@ -31,7 +29,7 @@ public class ProfesorTab extends JPanel {
 	private ProfesoriTable profesoriTable;
 	private TableRowSorter<AbstractTableModelProfesori> sorter;
 	
-	public ProfesorTab() {
+	private ProfesorTab() {
 		this.setLayout(new BorderLayout());
 		this.setBorder(new EmptyBorder(70, 100, 100, 100));
 		profesoriTable = new ProfesoriTable();

@@ -15,7 +15,6 @@ import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JFrame;
-import javax.swing.JScrollPane;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
@@ -28,6 +27,10 @@ import listeners.saveWindowListener;
 
 
 public class MainFrame extends JFrame {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -8381101596657764909L;
 	public static MainFrame instance = null;
 	
 	public static MainFrame getInstance() {
@@ -41,7 +44,7 @@ public class MainFrame extends JFrame {
 	private TabbedPane tabbedPane;
 	private Integer currentTab = 0;
 	
-	private PredmetiTable predmetiTable;
+	
 	
 	
 	private MainFrame() {

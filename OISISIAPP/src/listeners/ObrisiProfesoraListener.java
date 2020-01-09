@@ -4,7 +4,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import controller.ProfesorController;
-import view.PredmetTab;
 import view.ProfesorTab;
 
 public class ObrisiProfesoraListener implements ActionListener {

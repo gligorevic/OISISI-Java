@@ -19,6 +19,11 @@ import view.MainFrame;
 public class PrikaziProfesoraDialog extends JDialog {
 
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -1899403065027291129L;
+
 	public PrikaziProfesoraDialog(int row) {
 		super(MainFrame.getInstance(), "Profesor", true);
 	

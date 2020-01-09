@@ -13,9 +13,13 @@ import javax.swing.table.TableCellEditor;
 import javax.swing.table.TableCellRenderer;
 
 import dialogs.PrikaziProfesoraDialog;
-import dialogs.PrikaziStudenteDialog;
 
 public class ButtonColumnProfesor extends AbstractCellEditor implements TableCellRenderer, TableCellEditor, MouseListener{
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 8257984187419218250L;
 
 	private JTable table;
 	

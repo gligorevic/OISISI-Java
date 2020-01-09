@@ -10,7 +10,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
-import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -19,13 +18,11 @@ import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JFormattedTextField;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.text.MaskFormatter;
 
 import controller.ProfesorController;
-import controller.StudentController;
 import view.MainFrame;
 
 public class DodajProfesoraDialog extends JDialog {
@@ -79,7 +76,7 @@ public class DodajProfesoraDialog extends JDialog {
 		JTextField titulaInput = new JTextField();//1
 		JTextField zvanjeInput = new JTextField(); //3
 		
-		DateFormat formatDatuma = new SimpleDateFormat("dd-mm-yyyy");
+		//DateFormat formatDatuma = new SimpleDateFormat("dd-mm-yyyy");
 		JFormattedTextField datumRodjenjaInput = new JFormattedTextField(getMaskFormatterDate("##-##-####"));
 		
 		
